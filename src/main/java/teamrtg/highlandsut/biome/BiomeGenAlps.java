@@ -89,7 +89,7 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
             int i1 = random.nextInt(16);
             BlockPos blockpos1 = pos.add(k, l, i1);
 
-            if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world, blockpos1, net.minecraft.block.state.pattern.BlockHelper.forBlock(Blocks.stone)))
+            if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world, blockpos1, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.stone)))
             {
                 world.setBlockState(blockpos1, Blocks.emerald_ore.getDefaultState(), 2);
             }

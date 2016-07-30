@@ -3,6 +3,7 @@ package teamrtg.highlandsut.generator.layer;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.init.Biomes;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -61,29 +62,29 @@ public class GenLayerBiomeHighlands extends GenLayer
                 {
                     aint1[j1 + i1 * areaWidth] = k1;
                 }
-                else if (k1 == Biome.mushroomIsland.biomeID)
+                else if (k1 == Biome.getIdForBiome(Biomes.MUSHROOM_ISLAND))
                 {
                     aint1[j1 + i1 * areaWidth] = k1;
                 }
                 else if (k1 == 1)
                 {
-                        aint1[j1 + i1 * areaWidth] = getWeightedBiomeEntry(DESERT).biome.biomeID;
+                        aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(DESERT).biome);
                 }
                 else if (k1 == 2)
                 {
-                        aint1[j1 + i1 * areaWidth] = getWeightedBiomeEntry(WARM).biome.biomeID;
+                        aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(WARM).biome);
                 }
                 else if (k1 == 3)
                 {
-                        aint1[j1 + i1 * areaWidth] = getWeightedBiomeEntry(COOL).biome.biomeID;
+                        aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(COOL).biome);
                 }
                 else if (k1 == 4)
                 {
-                    aint1[j1 + i1 * areaWidth] = getWeightedBiomeEntry(ICY).biome.biomeID;
+                    aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(ICY).biome);
                 }
                 else
                 {
-                    aint1[j1 + i1 * areaWidth] = Biome.mushroomIsland.biomeID;
+                    aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(Biomes.MUSHROOM_ISLAND);
                 }
             }
         }

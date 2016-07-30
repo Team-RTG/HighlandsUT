@@ -9,6 +9,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
@@ -27,12 +28,12 @@ public class BiomeGenAdirondacks extends BiomeGenBaseHighlands
         theBiomeDecorator.treesPerChunk = 2;
         theBiomeDecorator.grassPerChunk = 6;
         theBiomeDecorator.flowersPerChunk = 0;
-	    
+
         maxHeight = 0.8F;
         minHeight = 0.8F;
         temperature = 0.5F;
         rainfall = 0.6F;
-        
+
         this.terrainInt1 = 0;
         this.terrainInt2 = 1;
         this.terrainInt3 = 2;
@@ -68,7 +69,7 @@ public class BiomeGenAdirondacks extends BiomeGenBaseHighlands
 	            	HighlandsGenerators.firGen.generate(world, random, treepos);
 	            }
 	            else {
-	            	new WorldGenForest(false, false).generate(world, random, treepos);
+                    new WorldGenTrees(false, BiomeGenBaseHighlands.minTreeHeight, Blocks.LOG.getStateFromMeta(2), Blocks.LEAVES.getStateFromMeta(2), false).generate(world, random, treepos);
 	            }
 	            
 	        }
@@ -83,7 +84,7 @@ public class BiomeGenAdirondacks extends BiomeGenBaseHighlands
 	            	new WorldGenTaiga1().generate(world, random, treepos);
 	            }
 	            else {
-	            	new WorldGenForest(false, false).generate(world, random, treepos);
+	            	new WorldGenTrees(false, BiomeGenBaseHighlands.minTreeHeight, Blocks.LOG.getStateFromMeta(2), Blocks.LEAVES.getStateFromMeta(2), false).generate(world, random, treepos);
 	            }
 	            
 	        }
@@ -103,27 +104,27 @@ public class BiomeGenAdirondacks extends BiomeGenBaseHighlands
             int i1 = random.nextInt(16);
             BlockPos blockpos1 = pos.add(k, l, i1);
 
-            if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world, blockpos1, net.minecraft.block.state.pattern.BlockHelper.forBlock(Blocks.stone)))
+            if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world.getBlockState(blockpos1), world, blockpos1, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.STONE)))
             {
-                world.setBlockState(blockpos1, Blocks.emerald_ore.getDefaultState(), 2);
+                world.setBlockState(blockpos1, Blocks.EMERALD_ORE.getDefaultState(), 2);
             }
         }
     }
     
     public void genTerrainBlocks(World worldIn, Random random, ChunkPrimer primer, int x, int z, double whatisthis)
     {
-        this.topBlock = Blocks.grass.getDefaultState();
-        this.fillerBlock = Blocks.dirt.getDefaultState();
+        this.topBlock = Blocks.GRASS.getDefaultState();
+        this.fillerBlock = Blocks.DIRT.getDefaultState();
 
         if (whatisthis < 0.0D)
         {
-            this.topBlock = Blocks.dirt.getStateFromMeta(1);
-            this.fillerBlock = Blocks.dirt.getStateFromMeta(1);
+            this.topBlock = Blocks.DIRT.getStateFromMeta(1);
+            this.fillerBlock = Blocks.DIRT.getStateFromMeta(1);
         }
         if (whatisthis > 1.0D && this.terrainInt4 != this.terrainInt2)
         {
-            this.topBlock = Blocks.stone.getDefaultState();
-            this.fillerBlock = Blocks.stone.getDefaultState();
+            this.topBlock = Blocks.STONE.getDefaultState();
+            this.fillerBlock = Blocks.STONE.getDefaultState();
         }
 
         this.generateBiomeTerrain(worldIn, random, primer, x, z, whatisthis);

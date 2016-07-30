@@ -23,9 +23,9 @@ public class WorldGenWatermelon extends WorldGenerator
 					locY + random.nextInt(4) - random.nextInt(4),
 					locZ + random.nextInt(8) - random.nextInt(8));
 
-            if (world.isAirBlock(pos2) && world.getBlockState(pos2.down(1)).getBlock() == Blocks.grass && Blocks.pumpkin.canPlaceBlockAt(world, pos2))
+            if (world.isAirBlock(pos2) && world.getBlockState(pos2.down(1)).getBlock() == Blocks.GRASS && Blocks.PUMPKIN.canPlaceBlockAt(world, pos2))
             {
-                world.setBlockState(pos2, Blocks.melon_block.getDefaultState());
+                world.setBlockState(pos2, Blocks.MELON_BLOCK.getDefaultState());
             }
         }
 

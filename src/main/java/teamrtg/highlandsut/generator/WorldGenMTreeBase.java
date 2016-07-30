@@ -59,16 +59,16 @@ public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
     //is the position of the tree dirt or grass?
     public boolean isLegalTreePosition(BlockPos pos, boolean snow, boolean sand){
     	
-    	if(world.getBlockState(pos).getBlock().equals(Blocks.water))return false;
+    	if(world.getBlockState(pos).getBlock().equals(Blocks.WATER))return false;
     	
     	pos = pos.down();
     	
     	//System.out.println("Tree Generating Block: " + world.getBlockState(pos).getBlock().getUnlocalizedName());
     	
     	
-    	return (world.getBlockState(pos).getBlock().canSustainPlant((IBlockAccess)world, pos, EnumFacing.UP, (IPlantable)Blocks.sapling) ||
-    			(world.getBlockState(pos).getBlock().equals(Blocks.sand) && sand) ||
-    			(world.getBlockState(pos).getBlock().equals(Blocks.snow) && snow)
+    	return (world.getBlockState(pos).getBlock().canSustainPlant(world.getBlockState(pos), (IBlockAccess)world, pos, EnumFacing.UP, (IPlantable)Blocks.SAPLING) ||
+    			(world.getBlockState(pos).getBlock().equals(Blocks.SAND) && sand) ||
+    			(world.getBlockState(pos).getBlock().equals(Blocks.SNOW) && snow)
     			);
     }
     
@@ -216,7 +216,7 @@ public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
     
     protected void setBlockLeaf(BlockPos pos){
     	try{
-			if(world.isAirBlock(pos) || world.getBlockState(pos).getBlock().equals(Blocks.tallgrass) || world.getBlockState(pos).equals(Blocks.snow_layer.getDefaultState())){
+			if(world.isAirBlock(pos) || world.getBlockState(pos).getBlock().equals(Blocks.TALLGRASS) || world.getBlockState(pos).equals(Blocks.SNOW_LAYER.getDefaultState())){
 				world.setBlockState(pos, leaves.getStateFromMeta(leafMeta));//getDefaultState().withProperty(BlockHighlandsLeaves.CHECK_DECAY, true).withProperty(BlockHighlandsLeaves.DECAYABLE, true));
 			}
     	}
@@ -257,7 +257,7 @@ public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
     			for(int j = y; j <= y+height; j++){
     				BlockPos pos2 = new BlockPos(i, j, k);
     				
-    				if(!(world.isAirBlock(pos2) || world.getBlockState(pos2).getBlock().isLeaves(world, pos2)))
+    				if(!(world.isAirBlock(pos2) || world.getBlockState(pos2).getBlock().isLeaves(world.getBlockState(pos2), world, pos2)))
     					return false;
     			}
     		}

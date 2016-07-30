@@ -22,6 +22,8 @@ public abstract class BiomeGenBaseHighlands extends Biome
 	public ArrayList<WorldGenPlants> plants;
 	public int plantsPerChunk;
 
+	public static int minTreeHeight = 4;
+
 	public BiomeGenBaseHighlands(int a){
 		super(a);
 		subBiomes = new ArrayList<Biome>();

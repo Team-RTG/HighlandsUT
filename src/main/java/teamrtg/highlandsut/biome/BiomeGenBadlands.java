@@ -2,6 +2,7 @@ package teamrtg.highlandsut.biome;
 
 import java.util.Random;
 
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -67,27 +68,27 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands
             int i1 = random.nextInt(16);
             BlockPos blockpos1 = pos.add(k, l, i1);
 
-            if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world, blockpos1, net.minecraft.block.state.pattern.BlockHelper.forBlock(Blocks.stone)))
+            if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world.getBlockState(blockpos1), world, blockpos1, BlockMatcher.forBlock(Blocks.STONE)))
             {
-                world.setBlockState(blockpos1, Blocks.emerald_ore.getDefaultState(), 2);
+                world.setBlockState(blockpos1, Blocks.EMERALD_ORE.getDefaultState(), 2);
             }
         }
     }
     
     public void genTerrainBlocks(World worldIn, Random random, ChunkPrimer primer, int x, int z, double whatisthis)
     {
-        this.topBlock = Blocks.grass.getDefaultState();
-        this.fillerBlock = Blocks.dirt.getDefaultState();
+        this.topBlock = Blocks.GRASS.getDefaultState();
+        this.fillerBlock = Blocks.DIRT.getDefaultState();
 
         if ((whatisthis < -1.0D || whatisthis > 2.0D) && this.terrainInt4 == this.terrainInt3)
         {
-            this.topBlock = Blocks.dirt.getStateFromMeta(1);
-            this.fillerBlock = Blocks.dirt.getStateFromMeta(1);
+            this.topBlock = Blocks.DIRT.getStateFromMeta(1);
+            this.fillerBlock = Blocks.DIRT.getStateFromMeta(1);
         }
         else if (whatisthis > 1.0D && this.terrainInt4 != this.terrainInt2)
         {
-            this.topBlock = Blocks.stained_hardened_clay.getStateFromMeta(8);
-            this.fillerBlock = Blocks.hardened_clay.getDefaultState();
+            this.topBlock = Blocks.STAINED_HARDENED_CLAY.getStateFromMeta(8);
+            this.fillerBlock = Blocks.HARDENED_CLAY.getDefaultState();
         }
 
         this.generateBiomeTerrain(worldIn, random, primer, x, z, whatisthis);

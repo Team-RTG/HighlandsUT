@@ -7,8 +7,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -125,7 +125,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
                     BlockPos blockpos1 = pos.add(j, 0, k);
                     net.minecraft.block.state.IBlockState state = this.world.getBlockState(blockpos1);
 
-                    if (state.getBlock().isAir(this.world, blockpos1) || state.getBlock().isLeaves(this.world, blockpos1))
+                    if (state.getBlock().isAir(state, this.world, blockpos1) || state.getBlock().isLeaves(state, this.world, blockpos1))
                     {
 //                        this.func_175905_a(this.world, blockpos1, leafBlock, leafMeta);
                         this.setBlockAndNotifyAdequately(this.world, blockpos1, leafBlock.getStateFromMeta(leafMeta));
@@ -345,7 +345,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     {
         BlockPos down = this.blockPosOrigin.down();
         net.minecraft.block.state.IBlockState state = this.world.getBlockState(down);
-        boolean isSoil = state.getBlock().canSustainPlant(this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling)Blocks.sapling));
+        boolean isSoil = state.getBlock().canSustainPlant(state, this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling)Blocks.SAPLING));
 
         if (!isSoil)
         {

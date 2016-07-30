@@ -3,10 +3,9 @@ package teamrtg.highlandsut.generator;
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -32,14 +31,14 @@ public class WorldGenMinable2 extends WorldGenerator
 
     public WorldGenMinable2(IBlockState blockState, int numBlocks, boolean generateInStone)
     {
-        this(blockState, numBlocks, BlockHelper.forBlock(Blocks.stone));
+        this(blockState, numBlocks, BlockMatcher.forBlock(Blocks.stone));
         genInStone = generateInStone;
         BSGin = null;
     }
     
     public WorldGenMinable2(IBlockState blockState, int numBlocks, IBlockState blockStateGenerateIn)
     {
-        this(blockState, numBlocks, BlockHelper.forBlock(Blocks.stone));
+        this(blockState, numBlocks, BlockMatcher.forBlock(Blocks.stone));
         genInStone = false;
         BSGin = blockStateGenerateIn;
     }
@@ -106,8 +105,8 @@ public class WorldGenMinable2 extends WorldGenerator
                                     else if(!(BSGin == null))
                                     {
                                     	if (world.getBlockState(blockpos1).equals(BSGin) || 
-                                    			(BSGin.equals(Blocks.dirt.getDefaultState()) &&
-                                    					world.getBlockState(blockpos1).equals(Blocks.grass.getDefaultState())))
+                                    			(BSGin.equals(Blocks.DIRT.getDefaultState()) &&
+                                    					world.getBlockState(blockpos1).equals(Blocks.GRASS.getDefaultState())))
 	                                    {
 	                                        world.setBlockState(blockpos1, this.oreBlock, 2);
 	                                    }
