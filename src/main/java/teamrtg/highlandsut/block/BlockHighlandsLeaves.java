@@ -3,12 +3,12 @@ package teamrtg.highlandsut.block;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockPlanks.EnumType;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerFoliage;
@@ -38,7 +37,7 @@ public class BlockHighlandsLeaves extends BlockLeaves
     	setUnlocalizedName(name + "_leaves");
         this.setHardness(0.2F);
         this.setLightOpacity(1);
-        this.setStepSound(soundTypeGrass);
+        this.setSoundType(SoundType.PLANT);
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
         
@@ -160,9 +159,9 @@ public class BlockHighlandsLeaves extends BlockLeaves
         return i;
     }
 
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+        return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
     }
 
     /**
@@ -175,14 +174,16 @@ public class BlockHighlandsLeaves extends BlockLeaves
 
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
-        if (!worldIn.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
+        if (!worldIn.isRemote && player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == Items.SHEARS)
         {
-            player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
+            // TODO: Commented out triggerAchievement() - WhichOnesPink
+            //player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
+
             spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(this), 1, 0));
         }
         else
         {
-            super.harvestBlock(worldIn, player, pos, state, te);
+            super.harvestBlock(worldIn, player, pos, state, te, null);
         }
     }
 

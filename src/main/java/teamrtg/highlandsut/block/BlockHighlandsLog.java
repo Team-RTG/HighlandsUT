@@ -1,9 +1,9 @@
 package teamrtg.highlandsut.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ public class BlockHighlandsLog extends BlockLog
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
         setHardness(2.0F);
     	setResistance(0.5F);
-    	setStepSound(Block.soundTypeWood);
+        setSoundType(SoundType.WOOD);
         setUnlocalizedName(treeName + "_log");
         
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
@@ -93,9 +93,9 @@ public class BlockHighlandsLog extends BlockLog
         return i;
     }
 
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {LOG_AXIS});
+        return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
     }
 
     protected ItemStack createStackedBlock(IBlockState state)

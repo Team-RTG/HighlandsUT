@@ -259,21 +259,21 @@ private static String biomePrefix = "";
 	 */
 	public static Biome createFoothills(Biome b1){
 		Class<? extends Biome> biomeClass = b1.getBiomeClass();
-		if(b1.biomeID > 127){
-			System.out.println("Error generating foothills biome- parent ID " + b1.biomeID + " is over 127.");
+		if(Biome.getIdForBiome(b1) > 127){
+			System.out.println("Error generating foothills biome- parent ID " + Biome.getIdForBiome(b1) + " is over 127.");
 			return null;
 		}
-		else if(Biome.getBiome(b1.biomeID + 128) != null){
-			System.out.println("Error generating foothills biome- foothills ID " + (b1.biomeID+128) + " is taken.");
+		else if(Biome.getBiome(Biome.getIdForBiome(b1) + 128) != null){
+			System.out.println("Error generating foothills biome- foothills ID " + (Biome.getIdForBiome(b1)+128) + " is taken.");
 			return null;
 		}
 		Biome fh = null;
 		try{
 			Constructor<?> biomeCons = biomeClass.getConstructor(int.class);
-			fh = (Biome) biomeCons.newInstance(b1.biomeID + 128);
+			fh = (Biome) biomeCons.newInstance(Biome.getIdForBiome(b1) + 128);
 			fh.maxHeight = b1.maxHeight /2;
 			fh.minHeight = b1.minHeight /2;
-			fh.setBiomeName(b1.biomeName + " foothills");
+			fh.setBiomeName(b1.getBiomeName() + " foothills");
 			foothillsBiomes.add(b1);
 		}
 		catch(Exception e){

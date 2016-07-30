@@ -1,6 +1,7 @@
 package teamrtg.highlandsut.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockHighlandsPlanks extends Block
@@ -10,10 +11,10 @@ public class BlockHighlandsPlanks extends Block
 	
     public BlockHighlandsPlanks(HighlandsBlocks.EnumTypeTree type, String treeName)
     {
-    	super(Material.wood);
+    	super(Material.WOOD);
     	setHardness(2.0F);
     	setResistance(0.5F);
-    	setStepSound(Block.soundTypeWood);
+        setSoundType(SoundType.WOOD);
         setUnlocalizedName(treeName + "_planks");
         
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
