@@ -1,0 +1,56 @@
+<!-- Blocks -->
+
+<!-- Saplings -->
+tile.highlands_eucalyptus_sapling.name=Eucalyptus Sapling
+tile.highlands_fir_sapling.name=Fir Sapling
+tile.highlands_poplar_sapling.name=Poplar Sapling
+tile.highlands_redwood_sapling.name=Redwood Sapling
+tile.highlands_evg_bush_sapling.name=Evergreen Bush Sapling
+tile.highlands_dec_bush_sapling.name=Deciduous Bush Sapling
+tile.highlands_palm_sapling.name=Palm Sapling
+tile.highlands_aspen_sapling.name=Aspen Sapling
+tile.highlands_bamboo_sapling.name=Bamboo Sapling
+	
+<!-- Logs -->
+tile.highlands_eucalyptus_log.name=Eucalyptus Log
+tile.highlands_fir_log.name=Fir Log
+tile.highlands_poplar_log.name=Poplar Log
+tile.highlands_redwood_log.name=Redwood Log
+tile.highlands_palm_log.name=Palm Log
+tile.highlands_aspen_log.name=Aspen Log
+tile.highlands_bamboo_log.name=Bamboo Stem
+
+<!-- Planks -->
+tile.highlands_eucalyptus_planks.name=Eucalyptus Wood Planks
+tile.highlands_fir_planks.name=Fir Wood Planks
+tile.highlands_poplar_planks.name=Poplar Wood Planks
+tile.highlands_redwood_planks.name=Redwood Wood Planks
+tile.highlands_palm_planks.name=Palm Wood Planks
+tile.highlands_aspen_planks.name=Aspen Wood Planks
+tile.highlands_bamboo_planks.name=Bamboo Planks
+	
+<!-- Leaves -->
+tile.highlands_eucalyptus_leaves.name=Eucalyptus Leaves
+tile.highlands_fir_leaves.name=Fir Leaves
+tile.highlands_poplar_leaves.name=Poplar Leaves
+tile.highlands_redwood_leaves.name=Redwood Leaves
+tile.highlands_palm_leaves.name=Palm Leaves
+tile.highlands_aspen_leaves.name=Aspen Leaves
+tile.highlands_bamboo_leaves.name=Bamboo Leaves
+
+<!-- Plants -->
+tile.highlands_blue_flower.name=Waterflower
+tile.highlands_cattail.name=Cattail
+tile.highlands_cotton.name=Cotton Bush
+tile.highlands_raspberry_bush.name=Raspberry Bush
+tile.highlands_blueberry_bush.name=Blueberry Bush
+tile.highlands_thorn_bush.name=Thornbush
+tile.highlands_lavender.name=Lavender
+tile.highlands_green_leaf.name=Tropical Leaf Fern
+tile.highlands_dune_grass.name=Dune Grass
+
+<!-- Other -->
+itemGroup.highlands=Highlands
+
+
+
