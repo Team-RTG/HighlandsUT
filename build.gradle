@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 sourceCompatibility = targetCompatibility = 1.8
 
-def parseprops(File cfg) {
+static def parseprops(File cfg) {
     cfg.withReader {
         def prop = new Properties()
         prop.load(it)
@@ -65,3 +65,19 @@ processResources {
 }
 
 sourceJar {classifier = 'src'}
+
+task devJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.output
+    include "teamrtg/rtg/**"
+    classifier = 'dev'
+}
+
+artifacts {archives devJar}
+
+// For a debugging session used 'gradle -DEBUG [runClient|runServer]'
+allprojects {
+    tasks.withType(JavaExec) {
+        jvmArgs '-Xms2G', '-Xmx4G'
+        if (System.getProperty("EBUG") != null) jvmArgs '-agentlib:jdwp=transport=dt_socket,address=localhost:5005,server=y,suspend=y'
+    }
+}
