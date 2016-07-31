@@ -4,22 +4,15 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenPoplarHills extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Poplar Hills")
-        .setBaseHeight(-0.1F)
-        .setHeightVariation(0.4F)
-        .setTemperature(0.6F)
-        .setRainfall(0.8F);
-
     public BiomeGenPoplarHills(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.POPLAR_HILLS.getProps());
 
         theBiomeDecorator.treesPerChunk = 6;
         theBiomeDecorator.grassPerChunk = 10;

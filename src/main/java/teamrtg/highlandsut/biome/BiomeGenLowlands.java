@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -13,11 +12,6 @@ import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenLowlands extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Lowlands")
-        .setBaseHeight(-0.1F)
-        .setHeightVariation(0.2F)
-        .setTemperature(0.5F)
-        .setRainfall(1.2F);
     private int terrainInt1;
     private int terrainInt2;
     private int terrainInt3;
@@ -25,7 +19,7 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands {
 
     public BiomeGenLowlands(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.LOWLANDS.getProps());
 
         theBiomeDecorator.treesPerChunk = 2;
         theBiomeDecorator.grassPerChunk = 4;

@@ -1,6 +1,5 @@
 package teamrtg.highlandsut.biome;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 import net.minecraft.init.Biomes;
@@ -12,6 +11,7 @@ import net.minecraftforge.common.BiomeManager.BiomeType;
 
 import teamrtg.highlandsut.Config;
 import teamrtg.highlandsut.HighlandsSettings;
+import teamrtg.highlandsut.util.BiomeUtils;
 
 /*
  * Highlands biomes - Highlands API
@@ -46,6 +46,11 @@ public class HighlandsBiomes {
     public static Biome baldHill;
     public static Biome tropicalIslands;
 
+    //Foothill biomes.
+    public static Biome adirondackFoothills;
+    public static Biome alpsFoothills;
+    public static Biome badlandsFoothills;
+    public static Biome greyMtnsFoothills;
 
     //ArrayList of biomes for the Highlands worldtype
     public static ArrayList<Biome> biomesForHighlands = new ArrayList<Biome>();
@@ -65,14 +70,26 @@ public class HighlandsBiomes {
         //main biomes
 
         if (Config.alpsGenerate.getBoolean(true)) {
+
             alps = new BiomeGenAlps(Config.alpsID.getInt());
             biomesForHighlands.add(alps);
-            createFoothills(alps);
+
+            if (canHaveFoothills(alps)) {
+                alpsFoothills = new BiomeGenAlpsFoothills(Config.alpsID.getInt() + 128);
+                biomesForHighlands.add(alpsFoothills);
+                foothillsBiomes.add(alps);
+            }
         }
         if (Config.badlandsGenerate.getBoolean(true)) {
+
             badlands = new BiomeGenBadlands(Config.badlandsID.getInt());
             biomesForHighlands.add(badlands);
-            createFoothills(badlands);
+
+            if (canHaveFoothills(badlands)) {
+                badlandsFoothills = new BiomeGenBadlandsFoothills(Config.badlandsID.getInt() + 128);
+                biomesForHighlands.add(badlandsFoothills);
+                foothillsBiomes.add(badlands);
+            }
         }
         if (Config.poplarHillsGenerate.getBoolean(true)) {
             poplarHills = new BiomeGenPoplarHills(Config.poplarHillsID.getInt());
@@ -103,9 +120,15 @@ public class HighlandsBiomes {
             biomesForHighlands.add(mojave);
         }
         if (Config.greyMtnsGenerate.getBoolean(true)) {
+
             greyMtns = new BiomeGenGreyMountains(Config.greyMtnsID.getInt());
             biomesForHighlands.add(greyMtns);
-            createFoothills(greyMtns);
+
+            if (canHaveFoothills(greyMtns)) {
+                greyMtnsFoothills = new BiomeGenGreyMountainsFoothills(Config.greyMtnsID.getInt() + 128);
+                biomesForHighlands.add(greyMtnsFoothills);
+                foothillsBiomes.add(greyMtns);
+            }
         }
         if (Config.tropHillsGenerate.getBoolean(true)) {
             tropHills = new BiomeGenTropHills(Config.tropHillsID.getInt());
@@ -116,9 +139,15 @@ public class HighlandsBiomes {
             biomesForHighlands.add(dryForest);
         }
         if (Config.adirondackGenerate.getBoolean(true)) {
+
             adirondack = new BiomeGenAdirondacks(Config.adirondackID.getInt());
             biomesForHighlands.add(adirondack);
-            createFoothills(adirondack);
+
+            if (canHaveFoothills(adirondack)) {
+                adirondackFoothills = new BiomeGenAdirondacksFoothills(Config.adirondackID.getInt() + 128);
+                biomesForHighlands.add(adirondackFoothills);
+                foothillsBiomes.add(adirondack);
+            }
         }
         if (Config.bambooForestGenerate.getBoolean(true)) {
             bambooForest = new BiomeGenBambooForest(Config.bambooForestID.getInt());
@@ -226,45 +255,31 @@ public class HighlandsBiomes {
 
         if (HighlandsSettings.vanillaBiomeChanges) {
 
+            /*
+
+            TODO: How do we change the attributes of already-registered biomes? - WhichOnesPink
+
             Biomes.EXTREME_HILLS.minHeight = 1.0F;
             Biomes.SWAMPLAND.minHeight = -0.1F;
             Biomes.SAVANNA_PLATEAU.minHeight = 1.0F;
             Biomes.STONE_BEACH.maxHeight = 0.5F;
             Biomes.RIVER.minHeight = -0.8F;
             Biomes.RIVER.maxHeight = 0.0F;
+            */
         }
     }
 
-    /**
-     * Creates a foothills biome, which has half the height of its parent mountain biome.
-     *
-     * @param b1 the mountain biome to create foothills for
-     * @return
-     */
-    public static Biome createFoothills(Biome b1) {
+    public static boolean canHaveFoothills(Biome b1) {
 
-        Class<? extends Biome> biomeClass = b1.getBiomeClass();
-        if (Biome.getIdForBiome(b1) > 127) {
-            System.out.println("Error generating foothills biome- parent ID " + Biome.getIdForBiome(b1) + " is over 127.");
-            return null;
+        if (BiomeUtils.getId(b1) > 127) {
+            throw new RuntimeException("Error generating foothills biome - parent ID " + BiomeUtils.getId(b1) + " is over 127.");
         }
-        else if (Biome.getBiome(Biome.getIdForBiome(b1) + 128) != null) {
-            System.out.println("Error generating foothills biome- foothills ID " + (Biome.getIdForBiome(b1) + 128) + " is taken.");
-            return null;
+
+        if (Biome.getBiome(BiomeUtils.getId(b1) + 128) != null) {
+            throw new RuntimeException("Error generating foothills biome - foothills ID " + (BiomeUtils.getId(b1) + 128) + " is taken.");
         }
-        Biome fh = null;
-        try {
-            Constructor<?> biomeCons = biomeClass.getConstructor(int.class);
-            fh = (Biome) biomeCons.newInstance(Biome.getIdForBiome(b1) + 128);
-            fh.setBaseHeight(b1.getHeightVariation() / 2);
-            fh.setBaseHeight(b1.getBaseHeight() / 2);
-            fh.setBiomeName(b1.getBiomeName() + " foothills");
-            foothillsBiomes.add(b1);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return fh;
+
+        return true;
     }
 }
 

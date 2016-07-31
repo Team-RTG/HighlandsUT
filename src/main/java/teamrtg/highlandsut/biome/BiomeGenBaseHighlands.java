@@ -22,6 +22,8 @@ public abstract class BiomeGenBaseHighlands extends Biome {
     public ArrayList<WorldGenPlants> plants;
     public int plantsPerChunk;
 
+    public Biome.BiomeProperties biomeProps;
+
     public BiomeGenBaseHighlands(Biome.BiomeProperties properties) {
 
         super(properties);
@@ -108,5 +110,67 @@ public abstract class BiomeGenBaseHighlands extends Biome {
             this.getSpawnableList(EnumCreatureType.CREATURE),
             waterCreatureList
         );
+    }
+
+    public static enum HLBiomeProps {
+
+        ADIRONDACKS ("Adirondacks", 0.8F, 0.8F, 0.5F, 0.6F, false),
+        ADIRONDACKS_FOOTHILLS ("Adirondacks Foothills", (0.8F / 2F), (0.8F / 2), 0.5F, 0.6F, false),
+        ALPS ("Alps", 1.5F, 1.0F, 0.0F, 0.7F, true),
+        ALPS_FOOTHILLS ("Alps Foothills", (1.5F / 2F), (1.0F / 2F), 0.0F, 0.7F, true),
+        BADLANDS ("Badlands", 0.8F, 0.6F, 0.6F, 0.1F, false),
+        BADLANDS_FOOTHILLS ("Badlands Foothills", (0.8F / 2F), (0.6F / 2F), 0.6F, 0.1F, false),
+        BALD_HILL ("Bald Hill", 1.5F, 0.4F, 0.5F, 0.7F, false),
+        BAMBOO_FOREST ("Bamboo Forest", 0.3F, 0.2F, 1.1F, 0.3F, false),
+        DRY_FOREST ("Dry Forest", 0.3F, 0.2F, 1.1F, 0.3F, false),
+        DUNES ("Dunes", -0.15F, 0.5F, 0.95F, 0.4F, false),
+        GREY_MOUNTAINS ("Grey Mountains", 1.8F, 1.0F, 0.6F, 0.1F, false),
+        GREY_MOUNTAINS_FOOTHILLS ("Grey Mountains Foothills", (1.8F / 2F), (1.0F / 2F), 0.6F, 0.1F, false),
+        HIGHLANDS ("Highlands", 0.7F, 0.4F, 0.6F, 0.2F, false),
+        LAKE ("Lake", -0.7F, 0.01F, 0.8F, 0.8F, false),
+        LOWLANDS ("Lowlands", -0.1F, 0.2F, 0.5F, 1.2F, false),
+        MEADOW ("Meadow", 0.15F, 0.15F, 0.7F, 0.8F, false),
+        MOJAVE ("Mojave", 0.2F, 0.4F, 1.6F, 0.1F, false),
+        PINELANDS ("Pinelands", 0.4F, 0.6F, 0.5F, 0.6F, false),
+        POPLAR_HILLS ("Poplar Hills", -0.1F, 0.4F, 0.6F, 0.8F, false),
+        REDWOOD_FOREST ("Redwood Forest", 0.5F, 0.2F, 0.6F, 0.2F, false),
+        TROPICAL_HILLS ("Tropical Hills", 0.4F, 0.5F, 0.95F, 0.7F, false),
+        TROPICAL_ISLANDS ("Tropical Islands", -0.2F, 0.2F, 0.95F, 1.2F, false);
+
+        private final String biomeName;
+        private final float baseHeight;
+        private final float heightVariation;
+        private final float temperature;
+        private final float rainfall;
+        private final boolean snowEnabled;
+        private final Biome.BiomeProperties props;
+
+        HLBiomeProps(String biomeName, float baseHeight, float heightVariation, float temperature, float rainfall, boolean snowEnabled) {
+
+            this.biomeName = biomeName;
+            this.baseHeight = baseHeight;
+            this.heightVariation = heightVariation;
+            this.temperature = temperature;
+            this.rainfall = rainfall;
+            this.snowEnabled = snowEnabled;
+
+            this.props = new Biome.BiomeProperties(this.biomeName)
+                .setBaseHeight(this.baseHeight)
+                .setHeightVariation(this.heightVariation)
+                .setTemperature(this.temperature);
+
+            if (this.snowEnabled) {
+                this.props.setSnowEnabled();
+            }
+        }
+
+        public String getBiomeName() { return this.biomeName; }
+        public float getBaseHeight() { return this.baseHeight; }
+        public float getHeightVariation() { return this.heightVariation; }
+        public float getTemperature() { return this.temperature; }
+        public float getRainfall() { return this.rainfall; }
+        public boolean getSnowEnabled() { return this.snowEnabled; }
+
+        public Biome.BiomeProperties getProps() { return this.props; }
     }
 }

@@ -10,11 +10,11 @@ import net.minecraft.world.gen.feature.WorldGenTaiga1;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenAlps extends BiomeGenBaseHighlands {
+public class BiomeGenAlpsFoothills extends BiomeGenBaseHighlands {
 
-    public BiomeGenAlps(int par1) {
+    public BiomeGenAlpsFoothills(int par1) {
 
-        super(HLBiomeProps.ALPS.getProps());
+        super(HLBiomeProps.ALPS_FOOTHILLS.getProps());
 
         theBiomeDecorator.treesPerChunk = 0;
         theBiomeDecorator.grassPerChunk = 0;

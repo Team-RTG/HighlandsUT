@@ -11,16 +11,16 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenBadlands extends BiomeGenBaseHighlands {
+public class BiomeGenBadlandsFoothills extends BiomeGenBaseHighlands {
 
     private int terrainInt1;
     private int terrainInt2;
     private int terrainInt3;
     private int terrainInt4;
 
-    public BiomeGenBadlands(int par1) {
+    public BiomeGenBadlandsFoothills(int par1) {
 
-        super(HLBiomeProps.BADLANDS.getProps());
+        super(HLBiomeProps.BADLANDS_FOOTHILLS.getProps());
 
         theBiomeDecorator.treesPerChunk = 1;
         theBiomeDecorator.grassPerChunk = 6;

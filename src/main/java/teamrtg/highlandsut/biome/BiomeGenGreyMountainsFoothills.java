@@ -10,13 +10,13 @@ import net.minecraft.world.gen.feature.WorldGenBlockBlob;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenGreyMountains extends BiomeGenBaseHighlands {
+public class BiomeGenGreyMountainsFoothills extends BiomeGenBaseHighlands {
 
     private static final WorldGenBlockBlob blockBlob = new WorldGenBlockBlob(Blocks.COBBLESTONE, 0);
 
-    public BiomeGenGreyMountains(int par1) {
+    public BiomeGenGreyMountainsFoothills(int par1) {
 
-        super(HLBiomeProps.GREY_MOUNTAINS.getProps());
+        super(HLBiomeProps.GREY_MOUNTAINS_FOOTHILLS.getProps());
 
         //this.spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
 
