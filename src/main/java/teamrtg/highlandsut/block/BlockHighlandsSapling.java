@@ -21,119 +21,132 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BlockHighlandsSapling extends BlockBush implements IGrowable{
+public class BlockHighlandsSapling extends BlockBush implements IGrowable {
 
-	private HighlandsBlocks.EnumTypeTree treeType;
+    public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
+    private HighlandsBlocks.EnumTypeTree treeType;
 
-	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
+    public BlockHighlandsSapling(HighlandsBlocks.EnumTypeTree type, String name) {
 
-	public BlockHighlandsSapling(HighlandsBlocks.EnumTypeTree type, String name) {
-		super();
-		treeType = type;
-		setUnlocalizedName(name + "_sapling");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
+        super();
+        treeType = type;
+        setUnlocalizedName(name + "_sapling");
+        this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
 
-		float f = 0.4F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+        float f = 0.4F;
+        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 
-		this.setCreativeTab(HighlandsBlocks.tabHighlands);
-	}
+        this.setCreativeTab(HighlandsBlocks.tabHighlands);
+    }
 
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (!worldIn.isRemote) {
-			super.updateTick(worldIn, pos, state, rand);
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 
-			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
-				this.grow(worldIn, pos, state, rand);
-			}
-		}
-	}
+        if (!worldIn.isRemote) {
+            super.updateTick(worldIn, pos, state, rand);
 
-	public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (((Integer) state.getValue(STAGE)).intValue() == 0) {
-			worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
-		} else {
-			this.generateTree(worldIn, pos, state, rand);
-		}
-	}
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+                this.grow(worldIn, pos, state, rand);
+            }
+        }
+    }
 
-	public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		WorldGenAbstractTree gen;
+    public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 
-		switch (treeType) {
-		case ASPEN:
-			gen = HighlandsGenerators.aspenSapling;
-			break;
-		case POPLAR:
-			gen = HighlandsGenerators.poplarSapling;
-			break;
-		case EUCA:
-			gen = HighlandsGenerators.eucalyptusSapling;
-			break;
-		case PALM:
-			gen = HighlandsGenerators.palmSapling;
-			break;
-		case FIR:
-			gen = HighlandsGenerators.firSapling;
-			break;
-		case REDWOOD:
-			gen = HighlandsGenerators.redwoodSapling;
-			break;
-		case BAMBOO: 
-			gen = HighlandsGenerators.bambooSapling; 
-			break;
-		default:
-			return;
-		}
+        if (((Integer) state.getValue(STAGE)).intValue() == 0) {
+            worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
+        }
+        else {
+            this.generateTree(worldIn, pos, state, rand);
+        }
+    }
 
-		boolean flag = gen.generate(worldIn, rand, pos);
+    public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 
-		// if tree is not in legal position, reset sapling.
-		if (!flag)
-			worldIn.setBlockState(pos, state);
-	}
+        WorldGenAbstractTree gen;
 
-	public int damageDropped(IBlockState state) {
-		return 0;
-	}
+        switch (treeType) {
+            case ASPEN:
+                gen = HighlandsGenerators.aspenSapling;
+                break;
+            case POPLAR:
+                gen = HighlandsGenerators.poplarSapling;
+                break;
+            case EUCA:
+                gen = HighlandsGenerators.eucalyptusSapling;
+                break;
+            case PALM:
+                gen = HighlandsGenerators.palmSapling;
+                break;
+            case FIR:
+                gen = HighlandsGenerators.firSapling;
+                break;
+            case REDWOOD:
+                gen = HighlandsGenerators.redwoodSapling;
+                break;
+            case BAMBOO:
+                gen = HighlandsGenerators.bambooSapling;
+                break;
+            default:
+                return;
+        }
 
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list) {
-		list.add(new ItemStack(itemIn, 1, 0));
-	}
+        boolean flag = gen.generate(worldIn, rand, pos);
 
-	/**
-	 * Whether this IGrowable can grow
-	 */
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		return true;
-	}
+        // if tree is not in legal position, reset sapling.
+        if (!flag) {
+            worldIn.setBlockState(pos, state);
+        }
+    }
 
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return (double) worldIn.rand.nextFloat() < 0.45D;
-	}
+    public int damageDropped(IBlockState state) {
 
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		this.grow(worldIn, pos, state, rand);
-	}
+        return 0;
+    }
 
-	/**
-	 * Convert the given metadata into a BlockState for this Block
-	 */
-	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
-	}
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item itemIn, CreativeTabs tab, List list) {
 
-	/**
-	 * Convert the BlockState into the correct metadata value
-	 */
-	public int getMetaFromState(IBlockState state) {
-		int i = 0;
-		i |= ((Integer) state.getValue(STAGE)).intValue() << 3;
-		return i;
-	}
+        list.add(new ItemStack(itemIn, 1, 0));
+    }
 
-	protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[] { STAGE });
-	}
+    /**
+     * Whether this IGrowable can grow
+     */
+    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+
+        return true;
+    }
+
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+
+        return (double) worldIn.rand.nextFloat() < 0.45D;
+    }
+
+    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+
+        this.grow(worldIn, pos, state, rand);
+    }
+
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     */
+    public IBlockState getStateFromMeta(int meta) {
+
+        return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     */
+    public int getMetaFromState(IBlockState state) {
+
+        int i = 0;
+        i |= ((Integer) state.getValue(STAGE)).intValue() << 3;
+        return i;
+    }
+
+    protected BlockState createBlockState() {
+
+        return new BlockState(this, new IProperty[]{STAGE});
+    }
 }

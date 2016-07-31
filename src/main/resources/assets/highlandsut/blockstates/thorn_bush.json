@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "highlands:thorn_bush" }
+        "normal": {
+            "model": "highlands:thorn_bush"
+        }
     }
 }

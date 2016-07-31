@@ -9,24 +9,23 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-public class GenerateRiverRapids implements IWorldGenerator
-{
-	
-	public static final int SEA_LEVEL = 64;
+public class GenerateRiverRapids implements IWorldGenerator {
 
-	/**
-	 * Generate some world
-	 *
-	 * @param random         the chunk specific {@link Random}.
-	 * @param chunkX         the chunk X coordinate of this chunk.
-	 * @param chunkZ         the chunk Z coordinate of this chunk.
-	 * @param world          : additionalData[0] The minecraft {@link World} we're generating for.
-	 * @param chunkGenerator : additionalData[1] The {@link IChunkProvider} that is generating.
-	 * @param chunkProvider  : additionalData[2] {@link IChunkProvider} that is requesting the world generation.
-	 */
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		/*
+    public static final int SEA_LEVEL = 64;
+
+    /**
+     * Generate some world
+     *
+     * @param random         the chunk specific {@link Random}.
+     * @param chunkX         the chunk X coordinate of this chunk.
+     * @param chunkZ         the chunk Z coordinate of this chunk.
+     * @param world          : additionalData[0] The minecraft {@link World} we're generating for.
+     * @param chunkGenerator : additionalData[1] The {@link IChunkProvider} that is generating.
+     * @param chunkProvider  : additionalData[2] {@link IChunkProvider} that is requesting the world generation.
+     */
+    @Override
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+        /*
 
 		*******************************************************************************************
 		* The entire body of this method was already commented out when I got here. - WhichOnesPink
@@ -63,14 +62,18 @@ public class GenerateRiverRapids implements IWorldGenerator
 			}
 		}
 		*/
-	}
-	
-	public int getNewSeaLevel(Biome b1, Biome b2){
-		double b1average = b1.minHeight+ b1.maxHeight/2;
-		double b2average = b2.minHeight+ b2.maxHeight/2;
-		
-		if(b2average + b1average > 2)	
-			return (int)(SEA_LEVEL + b1average + b2average);
-		else return SEA_LEVEL;
-	}
+    }
+
+    public int getNewSeaLevel(Biome b1, Biome b2) {
+
+        double b1average = b1.minHeight + b1.maxHeight / 2;
+        double b2average = b2.minHeight + b2.maxHeight / 2;
+
+        if (b2average + b1average > 2) {
+            return (int) (SEA_LEVEL + b1average + b2average);
+        }
+        else {
+            return SEA_LEVEL;
+        }
+    }
 }

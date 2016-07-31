@@ -4,26 +4,27 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenTropHills extends BiomeGenBaseHighlands
-{
+public class BiomeGenTropHills extends BiomeGenBaseHighlands {
 
-	public BiomeGenTropHills(int par1)
-    {
-        super(par1);
-        
+    private static BiomeProperties properties = new Biome.BiomeProperties("Tropical Hills")
+        .setBaseHeight(0.4F)
+        .setHeightVariation(0.5F)
+        .setTemperature(0.95F)
+        .setRainfall(0.7F);
+
+    public BiomeGenTropHills(int par1) {
+
+        super(properties);
+
         theBiomeDecorator.treesPerChunk = 12;
         theBiomeDecorator.grassPerChunk = 10;
         theBiomeDecorator.flowersPerChunk = 1;
-	    
-        this.minHeight = 0.4F;
-        this.maxHeight = 0.5F;
-        this.temperature = 0.95F;
-        this.rainfall = 0.7F;
-        
+
         plants.add(HighlandsGenerators.mcOrchid);
         plants.add(HighlandsGenerators.greenLeaf);
     }
@@ -31,15 +32,15 @@ public class BiomeGenTropHills extends BiomeGenBaseHighlands
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random)
-    {
+    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+
         return HighlandsGenerators.eucalyptusGen;
     }
-    
-    public void decorate(World world, Random random, BlockPos pos)
-    {
+
+    public void decorate(World world, Random random, BlockPos pos) {
+
         super.decorate(world, random, pos);
-        
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.coalCount/2, theBiomeDecorator.coalGen, theBiomeDecorator.chunkProviderSettings.coalMinHeight, theBiomeDecorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
+
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.coalCount / 2, theBiomeDecorator.coalGen, theBiomeDecorator.chunkProviderSettings.coalMinHeight, theBiomeDecorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
     }
 }

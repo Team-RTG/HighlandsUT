@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "highlands:dune_grass" }
+        "normal": {
+            "model": "highlands:dune_grass"
+        }
     }
 }
