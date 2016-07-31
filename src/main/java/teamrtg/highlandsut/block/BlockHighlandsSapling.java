@@ -7,7 +7,7 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -145,8 +145,8 @@ public class BlockHighlandsSapling extends BlockBush implements IGrowable {
         return i;
     }
 
-    protected BlockState createBlockState() {
+    protected BlockStateContainer createBlockState() {
 
-        return new BlockState(this, new IProperty[]{STAGE});
+        return new BlockStateContainer(this, new IProperty[]{STAGE});
     }
 }

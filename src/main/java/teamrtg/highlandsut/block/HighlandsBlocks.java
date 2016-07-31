@@ -2,7 +2,7 @@ package teamrtg.highlandsut.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -25,7 +25,7 @@ public class HighlandsBlocks {
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem() {
 
-            return Item.getItemFromBlock(Blocks.sapling);
+            return Item.getItemFromBlock(Blocks.SAPLING);
         }
     };
 
@@ -96,9 +96,9 @@ public class HighlandsBlocks {
             OreDictionary.registerOre("treeLeaves", leaves[i]);
             OreDictionary.registerOre("treeSapling", saplings[i]);
 
-            Blocks.fire.setFireInfo(leaves[i], 30, 60);
-            Blocks.fire.setFireInfo(planks[i], 5, 20);
-            Blocks.fire.setFireInfo(woods[i], 5, 5);
+            Blocks.FIRE.setFireInfo(leaves[i], 30, 60);
+            Blocks.FIRE.setFireInfo(planks[i], 5, 20);
+            Blocks.FIRE.setFireInfo(woods[i], 5, 5);
         }
 
         for (int i = 0; i < NUM_PLANTS; i++) {
@@ -106,7 +106,7 @@ public class HighlandsBlocks {
 
             GameRegistry.registerBlock(plants[i], plants[i].getUnlocalizedName().substring(15));
 
-            Blocks.fire.setFireInfo(plants[i], 60, 100);
+            Blocks.FIRE.setFireInfo(plants[i], 60, 100);
         }
         ((BlockHighlandsPlant) plants[EnumTypePlant.THORNBUSH.meta]).thornbush = true;
     }
