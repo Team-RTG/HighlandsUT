@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
@@ -14,11 +13,6 @@ import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenMojave extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Mojave")
-        .setBaseHeight(0.2F)
-        .setHeightVariation(0.4F)
-        .setTemperature(1.6F)
-        .setRainfall(0.1F);
     private int terrainInt1;
     private int terrainInt2;
     private int terrainInt3;
@@ -26,7 +20,7 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands {
 
     public BiomeGenMojave(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.MOJAVE.getProps());
 
         theBiomeDecorator.treesPerChunk = 1;
         theBiomeDecorator.grassPerChunk = 5;

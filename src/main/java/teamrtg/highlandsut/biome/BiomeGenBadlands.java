@@ -6,7 +6,6 @@ import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -14,11 +13,6 @@ import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenBadlands extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Badlands")
-        .setBaseHeight(0.8F)
-        .setHeightVariation(0.6F)
-        .setTemperature(0.6F)
-        .setRainfall(0.1F);
     private int terrainInt1;
     private int terrainInt2;
     private int terrainInt3;
@@ -26,7 +20,7 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands {
 
     public BiomeGenBadlands(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.BADLANDS.getProps());
 
         theBiomeDecorator.treesPerChunk = 1;
         theBiomeDecorator.grassPerChunk = 6;

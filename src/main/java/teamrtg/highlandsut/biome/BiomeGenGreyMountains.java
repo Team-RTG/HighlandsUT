@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBlockBlob;
 
@@ -14,15 +13,10 @@ import teamrtg.highlandsut.generator.HighlandsGenerators;
 public class BiomeGenGreyMountains extends BiomeGenBaseHighlands {
 
     private static final WorldGenBlockBlob blockBlob = new WorldGenBlockBlob(Blocks.COBBLESTONE, 0);
-    private static BiomeProperties properties = new Biome.BiomeProperties("Grey Mountains")
-        .setBaseHeight(1.8F)
-        .setHeightVariation(1.0F)
-        .setTemperature(0.6F)
-        .setRainfall(0.1F);
 
     public BiomeGenGreyMountains(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.GREY_MOUNTAINS.getProps());
 
         //this.spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
 

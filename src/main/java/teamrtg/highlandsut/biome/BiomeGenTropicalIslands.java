@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMelon;
 import net.minecraft.world.gen.feature.WorldGenVines;
@@ -13,15 +12,9 @@ import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenTropicalIslands extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Tropical Islands")
-        .setBaseHeight(-0.2F)
-        .setHeightVariation(0.2F)
-        .setTemperature(0.95F)
-        .setRainfall(1.2F);
-
     public BiomeGenTropicalIslands(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.TROPICAL_ISLANDS.getProps());
 
         theBiomeDecorator.treesPerChunk = 5;
         theBiomeDecorator.grassPerChunk = 8;

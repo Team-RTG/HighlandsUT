@@ -4,22 +4,15 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenDryForest extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Dry Forest")
-        .setBaseHeight(0.3F)
-        .setHeightVariation(0.2F)
-        .setTemperature(1.1F)
-        .setRainfall(0.3F);
-
     public BiomeGenDryForest(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.DRY_FOREST.getProps());
 
         theBiomeDecorator.treesPerChunk = 12;
         theBiomeDecorator.grassPerChunk = 10;

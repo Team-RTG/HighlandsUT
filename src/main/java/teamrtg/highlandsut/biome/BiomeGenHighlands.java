@@ -5,22 +5,15 @@ import java.util.Random;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
 public class BiomeGenHighlands extends BiomeGenBaseHighlands {
 
-    private static BiomeProperties properties = new Biome.BiomeProperties("Highlands")
-        .setBaseHeight(0.7F)
-        .setHeightVariation(0.4F)
-        .setTemperature(0.6F)
-        .setRainfall(0.2F);
-
     public BiomeGenHighlands(int par1) {
 
-        super(properties);
+        super(HLBiomeProps.HIGHLANDS.getProps());
 
         this.spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
 
