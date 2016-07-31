@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "highlands:green_leaf" }
+        "normal": {
+            "model": "highlands:green_leaf"
+        }
     }
 }

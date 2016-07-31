@@ -2,31 +2,32 @@ package teamrtg.highlandsut.biome;
 
 import java.util.Random;
 
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenLake extends BiomeGenBaseHighlands
-{
+public class BiomeGenLake extends BiomeGenBaseHighlands {
 
-	public BiomeGenLake(int par1)
-    {
-		super(par1);
-		
+    private static BiomeProperties properties = new Biome.BiomeProperties("Lake")
+        .setBaseHeight(-0.7F)
+        .setHeightVariation(0.01F)
+        .setTemperature(0.8F)
+        .setRainfall(0.8F);
+
+    public BiomeGenLake(int par1) {
+
+        super(properties);
+
         theBiomeDecorator.treesPerChunk = 3;
         theBiomeDecorator.grassPerChunk = 12;
         theBiomeDecorator.flowersPerChunk = 0;
-    	
-	    this.minHeight = -0.7F;
-	    this.maxHeight = 0.01F;
-        this.temperature = 0.8F;
-        this.rainfall = 0.8F;
-	    
+
         this.spawnableCreatureList.clear();
     }
-	
-	public WorldGenAbstractTree genBigTreeChance(Random random)
-    {
-		return HighlandsGenerators.poplarGen;
+
+    public WorldGenAbstractTree genBigTreeChance(Random random) {
+
+        return HighlandsGenerators.poplarGen;
     }
 }

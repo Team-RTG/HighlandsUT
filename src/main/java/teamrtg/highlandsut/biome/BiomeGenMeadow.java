@@ -5,31 +5,31 @@ import java.util.Random;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenMeadow extends BiomeGenBaseHighlands
-{
+public class BiomeGenMeadow extends BiomeGenBaseHighlands {
 
-	public BiomeGenMeadow(int par1)
-    {
-        super(par1);
-        
+    private static BiomeProperties properties = new Biome.BiomeProperties("Meadow")
+        .setBaseHeight(0.15F)
+        .setHeightVariation(0.15F)
+        .setTemperature(0.7F)
+        .setRainfall(0.8F);
+
+    public BiomeGenMeadow(int par1) {
+
+        super(properties);
+
         spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
-        
+
         theBiomeDecorator.treesPerChunk = 0;
         theBiomeDecorator.grassPerChunk = 15;
         theBiomeDecorator.flowersPerChunk = 8;
-        
+
         theBiomeDecorator.generateLakes = false;
-        
-        minHeight = 0.15F;
-        maxHeight = 0.15F;
-        
-        temperature = 0.7F;
-        rainfall = 0.8F;
-        
+
         plants.add(HighlandsGenerators.lavender);
         plants.add(HighlandsGenerators.cotton);
         plants.add(HighlandsGenerators.mcDaisy);
@@ -38,17 +38,17 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands
         plants.add(HighlandsGenerators.mcWTulip);
         plants.add(HighlandsGenerators.mcAllium);
     }
-    
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random)
-    {
+
+    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+
         return HighlandsGenerators.poplarGen;
     }
 
-    public void decorate(World world, Random random, BlockPos pos)
-    {
+    public void decorate(World world, Random random, BlockPos pos) {
+
         super.decorate(world, random, pos);
-        
+
         genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.lapisCount/2, theBiomeDecorator.lapisGen, 0, 32, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.lapisCount / 2, theBiomeDecorator.lapisGen, 0, 32, world, random, pos);
     }
 }

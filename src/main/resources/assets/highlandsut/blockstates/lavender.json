@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "highlands:lavender" }
+        "normal": {
+            "model": "highlands:lavender"
+        }
     }
 }

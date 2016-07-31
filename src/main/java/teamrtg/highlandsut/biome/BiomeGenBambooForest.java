@@ -4,26 +4,27 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import teamrtg.highlandsut.generator.HighlandsGenerators;
 
-public class BiomeGenBambooForest extends BiomeGenBaseHighlands
-{
+public class BiomeGenBambooForest extends BiomeGenBaseHighlands {
 
-	public BiomeGenBambooForest(int par1)
-    {
-        super(par1);
-        
+    private static BiomeProperties properties = new Biome.BiomeProperties("Bamboo Forest")
+        .setBaseHeight(0.3F)
+        .setHeightVariation(0.2F)
+        .setTemperature(1.1F)
+        .setRainfall(0.3F);
+
+    public BiomeGenBambooForest(int par1) {
+
+        super(properties);
+
         theBiomeDecorator.treesPerChunk = 35;
         theBiomeDecorator.grassPerChunk = 4;
         theBiomeDecorator.flowersPerChunk = 1;
-	    
-        minHeight = 0.3F;
-        maxHeight = 0.2F;
-        temperature = 1.1F;
-        rainfall = 0.3F;
-        
+
         plants.add(HighlandsGenerators.greenLeaf);
         plants.add(HighlandsGenerators.mcWTulip);
     }
@@ -31,16 +32,16 @@ public class BiomeGenBambooForest extends BiomeGenBaseHighlands
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random)
-    {
+    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+
         return HighlandsGenerators.bambooGen;
     }
-    
-    public void decorate(World world, Random random, BlockPos pos)
-    {
+
+    public void decorate(World world, Random random, BlockPos pos) {
+
         super.decorate(world, random, pos);
-        
+
         genStandardOre(2, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount/2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount / 2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
     }
 }

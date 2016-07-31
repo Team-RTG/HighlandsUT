@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "highlands:eucalyptus_planks" }
+        "normal": {
+            "model": "highlands:eucalyptus_planks"
+        }
     }
 }
