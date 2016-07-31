@@ -58,7 +58,7 @@ public class BlockHighlandsPlant extends BlockBush implements IGrowable {
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         // TODO Auto-generated method stub
-        return super.canBlockStay(worldIn, pos, state) || state.getBlock().equals(Blocks.sand);
+        return super.canBlockStay(worldIn, pos, state) || state.getBlock().equals(Blocks.SAND);
     }
 
     /**
@@ -66,7 +66,7 @@ public class BlockHighlandsPlant extends BlockBush implements IGrowable {
      */
     protected boolean canPlaceBlockOn(Block ground) {
 
-        return ground == Blocks.grass || ground == Blocks.dirt || ground == Blocks.farmland || ground == Blocks.sand;
+        return ground == Blocks.GRASS || ground == Blocks.DIRT || ground == Blocks.FARMLAND || ground == Blocks.SAND;
     }
 
 
