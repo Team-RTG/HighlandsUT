@@ -68,7 +68,7 @@ sourceJar {classifier = 'src'}
 
 task devJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.output
-    include "teamrtg/rtg/**"
+    include "teamrtg/highlandsut/**"
     classifier = 'dev'
 }
 
