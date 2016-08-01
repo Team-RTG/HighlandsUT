@@ -7,8 +7,13 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
 public class BlockHighlandsLog extends BlockLog {
+
+    protected static final AxisAlignedBB BAMBOO_BOUNDING_BOX = new AxisAlignedBB(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 
     private HighlandsBlocks.EnumTypeTree treeType;
 
@@ -25,12 +30,20 @@ public class BlockHighlandsLog extends BlockLog {
         treeType = type;
 
         if (type.equals(HighlandsBlocks.EnumTypeTree.BAMBOO)) {
-            this.setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
             this.setLightOpacity(1);
             setHardness(1.0F);
         }
+    }
 
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        if (this.treeType.equals(HighlandsBlocks.EnumTypeTree.BAMBOO)) {
 
+            return BAMBOO_BOUNDING_BOX;
+        }
+
+        return FULL_BLOCK_AABB;
     }
 
     public boolean isOpaqueCube() {
