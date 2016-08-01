@@ -6,42 +6,32 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerBiomeEdge;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import teamrtg.highlands.biome.ChunkProviderHighlands;
 import teamrtg.highlands.generator.layer.GenLayerBiomeHighlands;
 
 public class WorldTypeHighlands extends WorldType {
 
-    private String wtname;
-
     public WorldTypeHighlands(String name) {
 
         super(name);
-        this.wtname = name;
     }
 
     @Override
-    public net.minecraft.world.chunk.IChunkProvider getChunkGenerator(World world, String generatorOptions) {
+    public net.minecraft.world.chunk.IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
 
         if (this == FLAT) {
             return new net.minecraft.world.gen.ChunkProviderFlat(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled(), generatorOptions);
         }
+
         if (this == DEBUG_WORLD) {
             return new net.minecraft.world.gen.ChunkProviderDebug(world);
         }
+
+        if (this == CUSTOMIZED) {
+            return new net.minecraft.world.gen.ChunkProviderOverworld(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled(), generatorOptions);
+        }
+
         return new ChunkProviderHighlands(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled(), generatorOptions);
-    }
-
-    /**
-     * Gets the translation key for the name of this world type.
-     */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public String getTranslateName() {
-
-        return this.wtname;
     }
 
     /**
@@ -49,6 +39,7 @@ public class WorldTypeHighlands extends WorldType {
      *
      * @return The height to render clouds at
      */
+    @Override
     public float getCloudHeight() {
 
         return 212.0F;
@@ -63,12 +54,12 @@ public class WorldTypeHighlands extends WorldType {
      * @param chunkProviderSettingsJson The JSON string to use when initializing ChunkProviderSettings.Factory
      * @return A GenLayer that will return ints representing the Biomes to be generated, see GenLayerBiome
      */
-    public GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer, String chunkProviderSettingsJson) {
+    @Override
+    public net.minecraft.world.gen.layer.GenLayer getBiomeLayer(long worldSeed, net.minecraft.world.gen.layer.GenLayer parentLayer, String chunkProviderSettingsJson) {
 
         GenLayer ret = new GenLayerBiomeHighlands(200L, parentLayer, this, chunkProviderSettingsJson);
         ret = GenLayerZoom.magnify(1000L, ret, 2);
         ret = new GenLayerBiomeEdge(1000L, ret);
         return ret;
     }
-
 }
