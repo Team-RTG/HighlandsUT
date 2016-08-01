@@ -34,14 +34,14 @@ public class WorldGenMinable2 extends WorldGenerator {
 
     public WorldGenMinable2(IBlockState blockState, int numBlocks, boolean generateInStone) {
 
-        this(blockState, numBlocks, BlockMatcher.forBlock(Blocks.stone));
+        this(blockState, numBlocks, BlockMatcher.forBlock(Blocks.STONE));
         genInStone = generateInStone;
         BSGin = null;
     }
 
     public WorldGenMinable2(IBlockState blockState, int numBlocks, IBlockState blockStateGenerateIn) {
 
-        this(blockState, numBlocks, BlockMatcher.forBlock(Blocks.stone));
+        this(blockState, numBlocks, BlockMatcher.forBlock(Blocks.STONE));
         genInStone = false;
         BSGin = blockStateGenerateIn;
     }
@@ -93,7 +93,7 @@ public class WorldGenMinable2 extends WorldGenerator {
                                     BlockPos blockpos1 = new BlockPos(l1, i2, j2);
 
                                     if (genInStone) {
-                                        if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world, blockpos1, this.field_175919_c)) {
+                                        if (world.getBlockState(blockpos1).getBlock().isReplaceableOreGen(world.getBlockState(blockpos1), world, blockpos1, this.field_175919_c)) {
                                             world.setBlockState(blockpos1, this.oreBlock, 2);
                                         }
                                     }

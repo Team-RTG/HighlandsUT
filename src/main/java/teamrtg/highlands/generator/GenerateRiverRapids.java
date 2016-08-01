@@ -66,8 +66,8 @@ public class GenerateRiverRapids implements IWorldGenerator {
 
     public int getNewSeaLevel(Biome b1, Biome b2) {
 
-        double b1average = b1.minHeight + b1.maxHeight / 2;
-        double b2average = b2.minHeight + b2.maxHeight / 2;
+        double b1average = b1.getBaseHeight() + b1.getHeightVariation() / 2;
+        double b2average = b2.getBaseHeight() + b2.getHeightVariation() / 2;
 
         if (b2average + b1average > 2) {
             return (int) (SEA_LEVEL + b1average + b2average);
