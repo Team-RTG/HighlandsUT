@@ -1,11 +1,6 @@
 package teamrtg.highlands.generator.layer;
 
-import java.util.concurrent.Callable;
-
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.init.Biomes;
-import net.minecraft.util.ReportedException;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkProviderSettings;
@@ -17,35 +12,15 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 
 public abstract class GenLayerHighlands {
 
-    /**
-     * parent GenLayer that was provided via the constructor
-     */
-    protected GenLayer parent;
-    /**
-     * base seed to the LCG prng provided via the constructor
-     */
-    protected long baseSeed;
-    /**
-     * seed from World#getWorldSeed that is used in the LCG prng
-     */
     private long worldGenSeed;
-    /**
-     * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
-     * pseudorandom numbers
-     */
+    protected GenLayer parent;
     private long chunkSeed;
+    protected long baseSeed;
 
-    public GenLayerHighlands(long p_i2125_1_) {
-
-        this.baseSeed = p_i2125_1_;
-        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        this.baseSeed += p_i2125_1_;
-        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        this.baseSeed += p_i2125_1_;
-        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        this.baseSeed += p_i2125_1_;
-    }
-
+    /*
+     * TODO: Compare initializeAllBiomeGenerators() to vanilla GenLayer's version and tweak if necesary.
+     * TODO: It's possible that no changes need to be made to this method. Ask @Zeno410 to confirm.
+     */
     public static GenLayer[] initializeAllBiomeGenerators(long p_180781_0_, WorldType p_180781_2_, String p_180781_3_) {
 
         GenLayerIsland genlayerisland = new GenLayerIsland(1L);
@@ -114,70 +89,21 @@ public abstract class GenLayerHighlands {
         return new GenLayer[]{genlayerrivermix, genlayervoronoizoom, genlayerrivermix};
     }
 
-    protected static boolean biomesEqualOrMesaPlateau(int biomeIDA, int biomeIDB) {
+    public GenLayerHighlands(long p_i2125_1_) {
 
-        if (biomeIDA == biomeIDB) {
-            return true;
-        }
-        else if (biomeIDA != Biome.getIdForBiome(Biomes.MESA_ROCK) && biomeIDA != Biome.getIdForBiome(Biomes.MESA_CLEAR_ROCK)) {
-            final Biome biomegenbase = Biome.getBiome(biomeIDA);
-            final Biome biomegenbase1 = Biome.getBiome(biomeIDB);
-
-            try {
-                return biomegenbase != null && biomegenbase1 != null ? biomegenbase.isEqualTo(biomegenbase1) : false;
-            }
-            catch (Throwable throwable) {
-                CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Comparing biomes");
-                CrashReportCategory crashreportcategory = crashreport.makeCategory("Biomes being compared");
-                crashreportcategory.addCrashSection("Biome A ID", Integer.valueOf(biomeIDA));
-                crashreportcategory.addCrashSection("Biome B ID", Integer.valueOf(biomeIDB));
-                crashreportcategory.addCrashSectionCallable("Biome A", new Callable() {
-
-                    public String call() {
-
-                        return String.valueOf(biomegenbase);
-                    }
-                });
-                crashreportcategory.addCrashSectionCallable("Biome B", new Callable() {
-
-                    public String call() {
-
-                        return String.valueOf(biomegenbase1);
-                    }
-                });
-                throw new ReportedException(crashreport);
-            }
-        }
-        else {
-            return biomeIDB == Biome.mesaPlateau_F.biomeID || biomeIDB == Biome.mesaPlateau.biomeID;
-        }
+        this.baseSeed = p_i2125_1_;
+        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        this.baseSeed += p_i2125_1_;
+        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        this.baseSeed += p_i2125_1_;
+        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        this.baseSeed += p_i2125_1_;
     }
 
-    /**
-     * returns true if the biomeId is one of the various ocean biomes.
-     */
-    protected static boolean isBiomeOceanic(int p_151618_0_) {
-
-        return BiomeManager.oceanBiomes.contains(Biome.getBiome(p_151618_0_));
-    }
-
-    public static int getModdedBiomeSize(WorldType worldType, int original) {
-
-        WorldTypeEvent.BiomeSize event = new WorldTypeEvent.BiomeSize(worldType, original);
-        MinecraftForge.TERRAIN_GEN_BUS.post(event);
-        return event.getNewSize();
-    }
-
-    /**
-     * Initialize layer's local worldGenSeed based on its own baseSeed and the world's global seed (passed in as an
-     * argument).
-     */
-    public void initWorldGenSeed(long p_75905_1_) {
-
-        this.worldGenSeed = p_75905_1_;
-
+    public void initWorldGenSeed(long seed) {
+        this.worldGenSeed = seed;
         if (this.parent != null) {
-            this.parent.initWorldGenSeed(p_75905_1_);
+            this.parent.initWorldGenSeed(seed);
         }
 
         this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
@@ -188,11 +114,7 @@ public abstract class GenLayerHighlands {
         this.worldGenSeed += this.baseSeed;
     }
 
-    /**
-     * Initialize layer's current chunkSeed based on the local worldGenSeed and the (x,z) chunk coordinates.
-     */
     public void initChunkSeed(long p_75903_1_, long p_75903_3_) {
-
         this.chunkSeed = this.worldGenSeed;
         this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
         this.chunkSeed += p_75903_1_;
@@ -204,11 +126,7 @@ public abstract class GenLayerHighlands {
         this.chunkSeed += p_75903_3_;
     }
 
-    /**
-     * returns a LCG pseudo random number from [0, x). Args: int x
-     */
     protected int nextInt(int p_75902_1_) {
-
         int i = (int) ((this.chunkSeed >> 24) % (long) p_75902_1_);
         if (i < 0) {
             i += p_75902_1_;
@@ -219,31 +137,31 @@ public abstract class GenLayerHighlands {
         return i;
     }
 
-    /**
-     * Returns a list of integer values generated by this layer. These may be interpreted as temperatures, rainfall
-     * amounts, or biomeList[] indices based on the particular GenLayer subclass.
-     */
     public abstract int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight);
 
-    /**
-     * selects a random integer from a set of provided integers
-     */
-    protected int selectRandom(int... p_151619_1_) {
+    protected static boolean biomesEqualOrMesaPlateau(int biomeIDA, int biomeIDB) {
+        if(biomeIDA == biomeIDB) {
+            return true;
+        } else {
+            Biome biome = Biome.getBiome(biomeIDA);
+            Biome biome1 = Biome.getBiome(biomeIDB);
+            return biome != null && biome1 != null?(biome != Biomes.MESA_ROCK && biome != Biomes.MESA_CLEAR_ROCK?biome == biome1 || biome.getBiomeClass() == biome1.getBiomeClass():biome1 == Biomes.MESA_ROCK || biome1 == Biomes.MESA_CLEAR_ROCK):false;
+        }
+    }
 
+    protected static boolean isBiomeOceanic(int p_151618_0_) {
+        return BiomeManager.oceanBiomes.contains(Biome.getBiome(p_151618_0_));
+    }
+
+    protected int selectRandom(int... p_151619_1_) {
         return p_151619_1_[this.nextInt(p_151619_1_.length)];
     }
 
-    /**
-     * returns the most frequently occurring number of the set, or a random number from those provided
-     */
     protected int selectModeOrRandom(int p_151617_1_, int p_151617_2_, int p_151617_3_, int p_151617_4_) {
-
         return p_151617_2_ == p_151617_3_ && p_151617_3_ == p_151617_4_ ? p_151617_2_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_3_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_3_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_2_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_4_ && p_151617_2_ != p_151617_3_ ? p_151617_1_ : (p_151617_2_ == p_151617_3_ && p_151617_1_ != p_151617_4_ ? p_151617_2_ : (p_151617_2_ == p_151617_4_ && p_151617_1_ != p_151617_3_ ? p_151617_2_ : (p_151617_3_ == p_151617_4_ && p_151617_1_ != p_151617_2_ ? p_151617_3_ : this.selectRandom(new int[]{p_151617_1_, p_151617_2_, p_151617_3_, p_151617_4_}))))))))));
     }
 
-    /* ======================================== FORGE START =====================================*/
     protected long nextLong(long par1) {
-
         long j = (this.chunkSeed >> 24) % par1;
         if (j < 0L) {
             j += par1;
@@ -253,5 +171,11 @@ public abstract class GenLayerHighlands {
         this.chunkSeed += this.worldGenSeed;
         return j;
     }
-    /* ========================================= FORGE END ======================================*/
+
+    public static int getModdedBiomeSize(WorldType worldType, int original) {
+
+        WorldTypeEvent.BiomeSize event = new WorldTypeEvent.BiomeSize(worldType, original);
+        MinecraftForge.TERRAIN_GEN_BUS.post(event);
+        return event.getNewSize();
+    }
 }

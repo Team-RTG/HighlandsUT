@@ -1,5 +1,6 @@
 package teamrtg.highlands.generator.layer;
 
+import net.minecraft.init.Biomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerHills;
@@ -9,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamrtg.highlands.biome.BiomeGenBaseHighlands;
 import teamrtg.highlands.biome.HighlandsBiomes;
+import teamrtg.highlands.util.BiomeUtils;
 
 public class GenLayerHillsHighlands extends GenLayerHills {
 
@@ -59,93 +61,93 @@ public class GenLayerHillsHighlands extends GenLayerHills {
                     int i2 = k1;
                     int j2;
 
-                    if (k1 == Biome.desert.biomeID) {
-                        i2 = Biome.desertHills.biomeID;
+                    if (k1 == BiomeUtils.getId(Biomes.DESERT)) {
+                        i2 = BiomeUtils.getId(Biomes.DESERT_HILLS);
                     }
-                    else if (k1 == Biome.forest.biomeID) {
+                    else if (k1 == BiomeUtils.getId(Biomes.FOREST)) {
                         //Highlands code for bald hill as a sub of forest
                         j2 = this.nextInt(2);
 
                         if (j2 == 0) {
-                            i2 = Biome.forestHills.biomeID;
+                            i2 = BiomeUtils.getId(Biomes.FOREST_HILLS);
                         }
                         else {
-                            i2 = HighlandsBiomes.tropicalIslands == null ? Biome.forestHills.biomeID : HighlandsBiomes.baldHill.biomeID;
+                            i2 = HighlandsBiomes.tropicalIslands == null ? BiomeUtils.getId(Biomes.FOREST_HILLS) : BiomeUtils.getId(HighlandsBiomes.baldHill);
                         }
                     }
-                    else if (k1 == Biome.birchForest.biomeID) {
-                        i2 = Biome.birchForestHills.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.BIRCH_FOREST)) {
+                        i2 = BiomeUtils.getId(Biomes.BIRCH_FOREST_HILLS);
                     }
-                    else if (k1 == Biome.roofedForest.biomeID) {
-                        i2 = Biome.plains.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.ROOFED_FOREST)) {
+                        i2 = BiomeUtils.getId(Biomes.PLAINS);
                     }
-                    else if (k1 == Biome.taiga.biomeID) {
-                        i2 = Biome.taigaHills.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.TAIGA)) {
+                        i2 = BiomeUtils.getId(Biomes.TAIGA_HILLS);
                     }
-                    else if (k1 == Biome.megaTaiga.biomeID) {
-                        i2 = Biome.megaTaigaHills.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.REDWOOD_TAIGA)) {
+                        i2 = BiomeUtils.getId(Biomes.REDWOOD_TAIGA_HILLS);
                     }
-                    else if (k1 == Biome.coldTaiga.biomeID) {
-                        i2 = Biome.coldTaigaHills.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.COLD_TAIGA)) {
+                        i2 = BiomeUtils.getId(Biomes.COLD_TAIGA_HILLS);
                     }
-                    else if (k1 == Biome.plains.biomeID) {
+                    else if (k1 == BiomeUtils.getId(Biomes.PLAINS)) {
                         if (this.nextInt(5) == 0) {
                             if (this.nextInt(3) == 0) {
-                                i2 = Biome.forestHills.biomeID;
+                                i2 = BiomeUtils.getId(Biomes.FOREST_HILLS);
                             }
                             else {
-                                i2 = Biome.forest.biomeID;
+                                i2 = BiomeUtils.getId(Biomes.FOREST);
                             }
                         }
                     }
-                    else if (k1 == Biome.icePlains.biomeID) {
-                        i2 = Biome.iceMountains.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.ICE_PLAINS)) {
+                        i2 = BiomeUtils.getId(Biomes.ICE_MOUNTAINS);
                     }
-                    else if (k1 == Biome.jungle.biomeID) {
-                        i2 = Biome.jungleHills.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.JUNGLE)) {
+                        i2 = BiomeUtils.getId(Biomes.JUNGLE_HILLS);
                     }
-                    else if (k1 == Biome.ocean.biomeID) {
-                        i2 = Biome.deepOcean.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.OCEAN)) {
+                        i2 = BiomeUtils.getId(Biomes.DEEP_OCEAN);
                     }
-                    else if (k1 == Biome.extremeHills.biomeID) {
-                        i2 = Biome.extremeHillsPlus.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.EXTREME_HILLS)) {
+                        i2 = BiomeUtils.getId(Biomes.EXTREME_HILLS_WITH_TREES);
                     }
-                    else if (k1 == Biome.savanna.biomeID) {
-                        i2 = Biome.savannaPlateau.biomeID;
+                    else if (k1 == BiomeUtils.getId(Biomes.SAVANNA)) {
+                        i2 = BiomeUtils.getId(Biomes.SAVANNA_PLATEAU);
                     }
-                    else if (biomesEqualOrMesaPlateau(k1, Biome.mesaPlateau_F.biomeID)) {
-                        i2 = Biome.mesa.biomeID;
+                    else if (biomesEqualOrMesaPlateau(k1, BiomeUtils.getId(Biomes.MESA_ROCK))) {
+                        i2 = BiomeUtils.getId(Biomes.MESA);
                     }
-                    else if (k1 == Biome.deepOcean.biomeID && this.nextInt(5) == 0) {
+                    else if (k1 == BiomeUtils.getId(Biomes.DEEP_OCEAN) && this.nextInt(5) == 0) {
                         j2 = this.nextInt(5);
 
                         switch (j2) {
                             case 0:
-                                i2 = Biome.plains.biomeID;
+                                i2 = BiomeUtils.getId(Biomes.PLAINS);
                                 break;
                             case 1:
-                                i2 = Biome.forest.biomeID;
+                                i2 = BiomeUtils.getId(Biomes.FOREST);
                                 break;
                             case 2:
-                                i2 = Biome.jungle.biomeID;
+                                i2 = BiomeUtils.getId(Biomes.JUNGLE);
                                 break;
                             case 3:
-                                i2 = Biome.desert.biomeID + 128;
+                                i2 = BiomeUtils.getId(Biomes.DESERT) + 128;
                                 break;
                             case 4:
-                                i2 = HighlandsBiomes.tropicalIslands == null ? Biome.deepOcean.biomeID : HighlandsBiomes.tropicalIslands.biomeID;
+                                i2 = HighlandsBiomes.tropicalIslands == null ? BiomeUtils.getId(Biomes.DEEP_OCEAN) : BiomeUtils.getId(HighlandsBiomes.tropicalIslands);
                                 break;
                             default:
-                                i2 = Biome.deepOcean.biomeID;
+                                i2 = BiomeUtils.getId(Biomes.DEEP_OCEAN);
                                 break;
                         }
                     }
                     //Highlands code for any Highlands biome with subs
-                    else if (Biome.getBiomeGenArray()[k1] instanceof BiomeGenBaseHighlands) {
-                        BiomeGenBaseHighlands hlBiome = (BiomeGenBaseHighlands) Biome.getBiomeGenArray()[k1];
+                    else if (Biome.getBiome(k1) instanceof BiomeGenBaseHighlands) {
+                        BiomeGenBaseHighlands hlBiome = (BiomeGenBaseHighlands) Biome.getBiome(k1);
                         if (hlBiome.subBiomes.size() > 0) {
                             j2 = this.nextInt(hlBiome.subBiomes.size());
-                            i2 = hlBiome.subBiomes.get(j2).biomeID;
+                            i2 = BiomeUtils.getId(hlBiome.subBiomes.get(j2));
                         }
                     }
 
