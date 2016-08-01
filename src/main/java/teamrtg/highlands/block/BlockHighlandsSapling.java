@@ -12,7 +12,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -26,6 +28,9 @@ public class BlockHighlandsSapling extends BlockBush implements IGrowable {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
     private HighlandsBlocks.EnumTypeTree treeType;
 
+    private static float f = 0.4F;
+    private static final AxisAlignedBB SAPLING_BOUNDING_BOX = new AxisAlignedBB(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+
     public BlockHighlandsSapling(HighlandsBlocks.EnumTypeTree type, String name) {
 
         super();
@@ -33,10 +38,13 @@ public class BlockHighlandsSapling extends BlockBush implements IGrowable {
         setUnlocalizedName(name + "_sapling");
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
 
-        float f = 0.4F;
-        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return SAPLING_BOUNDING_BOX;
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
