@@ -12,8 +12,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import teamrtg.highlands.References;
 import teamrtg.highlands.generator.WorldGenPlants;
+import teamrtg.highlands.reference.ModInfo;
 
 public class BlockHighlandsPlant extends BlockBush implements IGrowable {
 
@@ -22,7 +22,7 @@ public class BlockHighlandsPlant extends BlockBush implements IGrowable {
     public BlockHighlandsPlant(String name) {
 
         super();
-        setUnlocalizedName(References.MOD_ID + "_" + name);
+        setUnlocalizedName(ModInfo.MOD_ID + "_" + name);
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
     }
 

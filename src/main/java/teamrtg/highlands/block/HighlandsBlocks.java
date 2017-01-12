@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-import teamrtg.highlands.References;
+import teamrtg.highlands.reference.ModInfo;
 
 public class HighlandsBlocks {
 
@@ -80,10 +80,10 @@ public class HighlandsBlocks {
 
         //initialize blocks within arrays
         for (int i = 0; i < NUM_TREE_TYPES; i++) {
-            planks[i] = new BlockHighlandsPlanks(EnumTypeTree.META_LOOKUP[i], References.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
-            woods[i] = new BlockHighlandsLog(EnumTypeTree.META_LOOKUP[i], References.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
-            leaves[i] = new BlockHighlandsLeaves(EnumTypeTree.META_LOOKUP[i], References.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
-            saplings[i] = new BlockHighlandsSapling(EnumTypeTree.META_LOOKUP[i], References.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
+            planks[i] = new BlockHighlandsPlanks(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
+            woods[i] = new BlockHighlandsLog(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
+            leaves[i] = new BlockHighlandsLeaves(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
+            saplings[i] = new BlockHighlandsSapling(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
 
 
             GameRegistry.registerBlock(planks[i], planks[i].getUnlocalizedName().substring(15));
@@ -130,7 +130,7 @@ public class HighlandsBlocks {
         Item item = Item.getItemFromBlock(block);
 
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
-            new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "inventory"));
+            new ModelResourceLocation(ModInfo.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "inventory"));
         /*
         if(block instanceof BlockHighlandsLeaves){
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 

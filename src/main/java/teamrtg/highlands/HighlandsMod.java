@@ -19,8 +19,9 @@ import teamrtg.highlands.block.HighlandsBlocks;
 import teamrtg.highlands.generator.GeneratePlants;
 import teamrtg.highlands.generator.GenerateRiverRapids;
 import teamrtg.highlands.generator.GenerateTrees;
+import teamrtg.highlands.reference.ModInfo;
 
-@Mod(modid = References.MOD_ID, name = References.MOD_NAME, version = References.MC_VERSION)
+@Mod(modid = ModInfo.MOD_ID, name = ModInfo.MOD_NAME, version = ModInfo.MOD_VERSION)
 public class HighlandsMod {
 
     public static WorldType worldTypeHighlands;
@@ -36,7 +37,7 @@ public class HighlandsMod {
         MinecraftForge.TERRAIN_GEN_BUS.register(eventMgr);
         MinecraftForge.EVENT_BUS.register(eventMgr);
 
-        Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "Highlands.cfg"));
+        Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "highlands.cfg"));
         config.load();
         Config.setUpConfig(config);
         config.save();
