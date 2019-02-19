@@ -22,9 +22,9 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.MOJAVE.getProps());
 
-        theBiomeDecorator.treesPerChunk = 1;
-        theBiomeDecorator.grassPerChunk = 5;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 1;
+        decorator.grassPerChunk = 5;
+        decorator.flowersPerChunk = 0;
 
         this.spawnableCreatureList.clear();
 
@@ -50,7 +50,7 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(5, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount / 2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.goldCount / 2, decorator.goldGen, decorator.chunkProviderSettings.goldMinHeight, decorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
     }
 
     public void genTerrainBlocks(World worldIn, Random random, ChunkPrimer primer, int x, int z, double whatisthis) {

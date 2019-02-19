@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -41,7 +41,7 @@ dependencies {
 }
 
 minecraft {
-    version = (ref.mcf_suffix!='') ? ref.mcf_version + '-' + ref.mcf_suffix : ref.mcf_version
+    version = ref.mc_version + '-' + ref.mcf_version
     mappings = ref.mcp_mappings
     runDir = ref.run_dir
     makeObfSourceJar = false

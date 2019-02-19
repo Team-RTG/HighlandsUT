@@ -17,9 +17,9 @@ public class BiomeGenHighlands extends BiomeGenBaseHighlands {
 
         this.spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
 
-        theBiomeDecorator.treesPerChunk = 3;
-        theBiomeDecorator.grassPerChunk = 12;
-        theBiomeDecorator.flowersPerChunk = 6;
+        decorator.treesPerChunk = 3;
+        decorator.grassPerChunk = 12;
+        decorator.flowersPerChunk = 6;
 
         plants.add(HighlandsGenerators.thornbush);
         plants.add(HighlandsGenerators.lavender);
@@ -38,6 +38,6 @@ public class BiomeGenHighlands extends BiomeGenBaseHighlands {
 
         super.decorate(world, random, pos);
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.coalCount / 2, theBiomeDecorator.coalGen, theBiomeDecorator.chunkProviderSettings.coalMinHeight, theBiomeDecorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.coalCount / 2, decorator.coalGen, decorator.chunkProviderSettings.coalMinHeight, decorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
     }
 }

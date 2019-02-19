@@ -14,9 +14,9 @@ public class BiomeGenTropHills extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.TROPICAL_HILLS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 12;
-        theBiomeDecorator.grassPerChunk = 10;
-        theBiomeDecorator.flowersPerChunk = 1;
+        decorator.treesPerChunk = 12;
+        decorator.grassPerChunk = 10;
+        decorator.flowersPerChunk = 1;
 
         plants.add(HighlandsGenerators.mcOrchid);
         plants.add(HighlandsGenerators.greenLeaf);
@@ -34,6 +34,6 @@ public class BiomeGenTropHills extends BiomeGenBaseHighlands {
 
         super.decorate(world, random, pos);
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.coalCount / 2, theBiomeDecorator.coalGen, theBiomeDecorator.chunkProviderSettings.coalMinHeight, theBiomeDecorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.coalCount / 2, decorator.coalGen, decorator.chunkProviderSettings.coalMinHeight, decorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
     }
 }

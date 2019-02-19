@@ -24,7 +24,7 @@ import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.*;
 
-public class ChunkProviderHighlands implements IChunkGenerator {
+public class ChunkGeneratorHighlands implements IChunkGenerator {
 
     protected static final IBlockState STONE = Blocks.STONE.getDefaultState();
     private final Random rand;
@@ -44,7 +44,7 @@ public class ChunkProviderHighlands implements IChunkGenerator {
     private NoiseGeneratorOctaves maxLimitPerlinNoise;
     private NoiseGeneratorOctaves mainPerlinNoise;
     private NoiseGeneratorPerlin surfaceNoise;
-    private ChunkProviderSettings settings;
+    private ChunkGeneratorSettings settings;
     private IBlockState oceanBlock = Blocks.WATER.getDefaultState();
     private double[] depthBuffer = new double[256];
     private MapGenBase caveGenerator = new MapGenCaves();
@@ -56,7 +56,7 @@ public class ChunkProviderHighlands implements IChunkGenerator {
     private StructureOceanMonument oceanMonumentGenerator = new StructureOceanMonument();
     private Biome[] biomesForGeneration;
 
-    public ChunkProviderHighlands(World worldIn, long seed, boolean mapFeaturesEnabledIn, String p_i46668_5_) {
+    public ChunkGeneratorHighlands(World worldIn, long seed, boolean mapFeaturesEnabledIn, String p_i46668_5_) {
 
         {
             caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
@@ -83,13 +83,13 @@ public class ChunkProviderHighlands implements IChunkGenerator {
 
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
-                float f = 10.0F / MathHelper.sqrt_float((float) (i * i + j * j) + 0.2F);
+                float f = 10.0F / MathHelper.sqrt((float) (i * i + j * j) + 0.2F);
                 this.biomeWeights[i + 2 + (j + 2) * 5] = f;
             }
         }
 
         if (p_i46668_5_ != null) {
-            this.settings = ChunkProviderSettings.Factory.jsonToFactory(p_i46668_5_).build();
+            this.settings = ChunkGeneratorSettings.Factory.jsonToFactory(p_i46668_5_).build();
             this.oceanBlock = this.settings.useLavaOceans ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState();
             worldIn.setSeaLevel(this.settings.seaLevel);
 
@@ -323,7 +323,7 @@ public class ChunkProviderHighlands implements IChunkGenerator {
                     double d2 = this.minLimitRegion[i] / (double) this.settings.lowerLimitScale;
                     double d3 = this.maxLimitRegion[i] / (double) this.settings.upperLimitScale;
                     double d4 = (this.mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
-                    double d5 = MathHelper.denormalizeClamp(d2, d3, d4) - d1;
+                    double d5 = MathHelper.clamp(d2, d3, d4) - d1;
 
                     if (l1 > 29) {
                         double d6 = (double) ((float) (l1 - 29) / 3.0F);
@@ -452,7 +452,7 @@ public class ChunkProviderHighlands implements IChunkGenerator {
 
         if (this.mapFeaturesEnabled) {
             if (creatureType == EnumCreatureType.MONSTER && this.scatteredFeatureGenerator.isSwampHut(pos)) {
-                return this.scatteredFeatureGenerator.getScatteredFeatureSpawnList();
+                return this.scatteredFeatureGenerator.getSc();
             }
 
             if (creatureType == EnumCreatureType.MONSTER && this.settings.useMonuments && this.oceanMonumentGenerator.isPositionInStructure(this.worldObj, pos)) {
@@ -464,9 +464,10 @@ public class ChunkProviderHighlands implements IChunkGenerator {
     }
 
     @Nullable
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
-
-        return "Stronghold".equals(structureName) && this.strongholdGenerator != null ? this.strongholdGenerator.getClosestStrongholdPos(worldIn, position) : null;
+    @Override
+    public BlockPos getNearestStructurePos(World world, String structureName, BlockPos pos, boolean findUnexplored)
+    {
+        return !this.mapFeaturesEnabled ? null : ("Stronghold".equals(structureName) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestStructurePos(world, pos, findUnexplored) : ("Mansion".equals(structureName) && this.woodlandMansionGenerator != null ? this.woodlandMansionGenerator.getNearestStructurePos(world, pos, findUnexplored) : ("Monument".equals(structureName) && this.oceanMonumentGenerator != null ? this.oceanMonumentGenerator.getNearestStructurePos(world, pos, findUnexplored) : ("Village".equals(structureName) && this.villageGenerator != null ? this.villageGenerator.getNearestStructurePos(world, pos, findUnexplored) : ("Mineshaft".equals(structureName) && this.mineshaftGenerator != null ? this.mineshaftGenerator.getNearestStructurePos(world, pos, findUnexplored) : ("Temple".equals(structureName) && this.scatteredFeatureGenerator != null ? this.scatteredFeatureGenerator.getNearestStructurePos(world, pos, findUnexplored) : null))))));
     }
 
     public void recreateStructures(Chunk chunkIn, int x, int z) {
@@ -497,7 +498,7 @@ public class ChunkProviderHighlands implements IChunkGenerator {
     //Highlands method - modifies horizontal noise to smooth the world out
     private void ModifySettingsForHighlands() {
 
-        ChunkProviderSettings.Factory fact = new ChunkProviderSettings.Factory();
+        ChunkGeneratorSettings.Factory fact = new ChunkGeneratorSettings.Factory();
         // custom realistic
 
         fact.coordinateScale = 450;

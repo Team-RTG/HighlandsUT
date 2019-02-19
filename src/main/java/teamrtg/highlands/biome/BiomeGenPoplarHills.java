@@ -14,9 +14,9 @@ public class BiomeGenPoplarHills extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.POPLAR_HILLS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 6;
-        theBiomeDecorator.grassPerChunk = 10;
-        theBiomeDecorator.flowersPerChunk = 4;
+        decorator.treesPerChunk = 6;
+        decorator.grassPerChunk = 10;
+        decorator.flowersPerChunk = 4;
 
         plants.add(HighlandsGenerators.mcOrchid);
         plants.add(HighlandsGenerators.mcDaisy);
@@ -33,6 +33,6 @@ public class BiomeGenPoplarHills extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.diamondCount / 2, theBiomeDecorator.diamondGen, theBiomeDecorator.chunkProviderSettings.diamondMinHeight, theBiomeDecorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.diamondCount / 2, decorator.diamondGen, decorator.chunkProviderSettings.diamondMinHeight, decorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
     }
 }

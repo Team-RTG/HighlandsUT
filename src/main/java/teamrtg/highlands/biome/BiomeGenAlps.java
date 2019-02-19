@@ -16,9 +16,9 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.ALPS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 0;
-        theBiomeDecorator.grassPerChunk = 0;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 0;
+        decorator.grassPerChunk = 0;
+        decorator.flowersPerChunk = 0;
 
         this.spawnableCreatureList.clear();
         this.topBlock = Blocks.SNOW.getDefaultState();
@@ -35,7 +35,7 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(12, HighlandsGenerators.hlice, 32, 100, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount / 2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.ironCount / 2, decorator.ironGen, decorator.chunkProviderSettings.ironMinHeight, decorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
 
         for (int i = 0; i < 10; i++) {
             if (world.getTopSolidOrLiquidBlock(pos).getY() < 80) {

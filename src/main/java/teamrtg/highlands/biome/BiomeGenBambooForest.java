@@ -14,9 +14,9 @@ public class BiomeGenBambooForest extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.BAMBOO_FOREST.getProps());
 
-        theBiomeDecorator.treesPerChunk = 35;
-        theBiomeDecorator.grassPerChunk = 4;
-        theBiomeDecorator.flowersPerChunk = 1;
+        decorator.treesPerChunk = 35;
+        decorator.grassPerChunk = 4;
+        decorator.flowersPerChunk = 1;
 
         plants.add(HighlandsGenerators.greenLeaf);
         plants.add(HighlandsGenerators.mcWTulip);
@@ -35,6 +35,6 @@ public class BiomeGenBambooForest extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(2, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount / 2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.goldCount / 2, decorator.goldGen, decorator.chunkProviderSettings.goldMinHeight, decorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
     }
 }

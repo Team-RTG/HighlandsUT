@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import teamrtg.highlands.block.HighlandsBlocks;
@@ -17,16 +18,16 @@ public class HighlandsRecipes {
             if (HighlandsBlocks.planks[i] != null && HighlandsBlocks.woods[i] != null) {
                 //Bamboo stem only crafts into one plank
                 if (i == HighlandsBlocks.EnumTypeTree.BAMBOO.getMetadata()) {
-                    GameRegistry.addShapelessRecipe(new ItemStack(HighlandsBlocks.planks[i], 1), new ItemStack(HighlandsBlocks.woods[i]));
+                    GameRegistry.addShapelessRecipe(new ResourceLocation(""), null,  new ItemStack(HighlandsBlocks.planks[i], 1), new ItemStack(HighlandsBlocks.woods[i]));
                 }
                 else {
                     GameRegistry.addShapelessRecipe(new ItemStack(HighlandsBlocks.planks[i], 4), new ItemStack(HighlandsBlocks.woods[i]));
                 }
 
                 //placeholder - recipes for wooden stairs and half slabs
-                GameRegistry.addRecipe(new ItemStack(Blocks.OAK_STAIRS, 4), "x  ", "xx ", "xxx", 'x', HighlandsBlocks.planks[i]);
-                GameRegistry.addRecipe(new ItemStack(Blocks.OAK_STAIRS, 4), "  x", " xx", "xxx", 'x', HighlandsBlocks.planks[i]);
-                GameRegistry.addRecipe(new ItemStack(Blocks.WOODEN_SLAB, 6), "   ", "   ", "xxx", 'x', HighlandsBlocks.planks[i]);
+                GameRegistry.addShapedRecipe(new ResourceLocation(HighlandsBlocks.planks[i].toString() + "Stairs"), null, new ItemStack(Blocks.OAK_STAIRS, 4), "x  ", "xx ", "xxx", 'x', HighlandsBlocks.planks[i]);
+                GameRegistry.addShapedRecipe(new ResourceLocation(HighlandsBlocks.planks[i].toString() + "Stairs2"), null, new ItemStack(Blocks.OAK_STAIRS, 4), "  x", " xx", "xxx", 'x', HighlandsBlocks.planks[i]);
+                GameRegistry.addShapedRecipe(new ResourceLocation(HighlandsBlocks.planks[i].toString() + "Slab"), null, new ItemStack(Blocks.WOODEN_SLAB, 6), "   ", "   ", "xxx", 'x', HighlandsBlocks.planks[i]);
 
                 //wood smelts into coal
                 GameRegistry.addSmelting(HighlandsBlocks.woods[i], new ItemStack(Items.COAL, 1, 1), 0.15F);
@@ -35,7 +36,7 @@ public class HighlandsRecipes {
 
         //Plants recipes
         GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE, 1, 6), new ItemStack(HighlandsBlocks.plants[0]));
-        GameRegistry.addRecipe(new ItemStack(Items.PAPER, 3), "   ", "xxx", "   ", 'x', new ItemStack(HighlandsBlocks.plants[1]));
+        GameRegistry.addShapedRecipe(new ItemStack(Items.PAPER, 3), "   ", "xxx", "   ", 'x', new ItemStack(HighlandsBlocks.plants[1]));
         GameRegistry.addShapelessRecipe(new ItemStack(Items.STRING, 1), new ItemStack(HighlandsBlocks.plants[2]));
         //GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack(HighlandsBlocks.plants[3]));
         //GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack(HighlandsBlocks.plants[4]));

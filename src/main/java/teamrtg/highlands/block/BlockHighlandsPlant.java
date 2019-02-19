@@ -51,7 +51,7 @@ public class BlockHighlandsPlant extends BlockBush implements IGrowable {
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 
         if (thornbush) {
-            entityIn.attackEntityFrom(DamageSource.cactus, 1);
+            entityIn.attackEntityFrom(DamageSource.CACTUS, 1);
         }
     }
 

@@ -21,11 +21,11 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.LOWLANDS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 2;
-        theBiomeDecorator.grassPerChunk = 4;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 2;
+        decorator.grassPerChunk = 4;
+        decorator.flowersPerChunk = 0;
 
-        theBiomeDecorator.generateLakes = false;
+        decorator.generateLakes = false;
 
         this.terrainInt1 = 0;
         this.terrainInt2 = 1;
@@ -52,7 +52,7 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.diamondCount / 2, theBiomeDecorator.diamondGen, theBiomeDecorator.chunkProviderSettings.diamondMinHeight, theBiomeDecorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.diamondCount / 2, decorator.diamondGen, decorator.chunkProviderSettings.diamondMinHeight, decorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
     }
 
     public void genTerrainBlocks(World worldIn, Random random, ChunkPrimer primer, int x, int z, double whatisthis) {

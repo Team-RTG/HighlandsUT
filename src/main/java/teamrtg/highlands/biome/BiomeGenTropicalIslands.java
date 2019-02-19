@@ -16,9 +16,9 @@ public class BiomeGenTropicalIslands extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.TROPICAL_ISLANDS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 5;
-        theBiomeDecorator.grassPerChunk = 8;
-        theBiomeDecorator.flowersPerChunk = 5;
+        decorator.treesPerChunk = 5;
+        decorator.grassPerChunk = 8;
+        decorator.flowersPerChunk = 5;
 
         plants.add(HighlandsGenerators.mcWTulip);
         plants.add(HighlandsGenerators.mcOTulip);
@@ -33,7 +33,7 @@ public class BiomeGenTropicalIslands extends BiomeGenBaseHighlands {
 
         super.decorate(world, random, pos);
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.diamondCount / 2, theBiomeDecorator.diamondGen, theBiomeDecorator.chunkProviderSettings.diamondMinHeight, theBiomeDecorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.diamondCount / 2, decorator.diamondGen, decorator.chunkProviderSettings.diamondMinHeight, decorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
         genStandardOre(5, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
         genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
 

@@ -7,7 +7,7 @@ import net.minecraft.init.Biomes;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkProviderSettings;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
@@ -18,10 +18,10 @@ import static net.minecraftforge.common.BiomeManager.BiomeType.*;
 public class GenLayerBiomeHighlands extends GenLayer {
 
     private static final String __OBFID = "CL_00000555";
-    private final ChunkProviderSettings field_175973_g;
+    private final ChunkGeneratorSettings field_175973_g;
     private List<BiomeEntry>[] biomes = new ArrayList[BiomeManager.BiomeType.values().length];
 
-    public GenLayerBiomeHighlands(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, String p_i45560_5_) {
+    public GenLayerBiomeHighlands(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, ChunkGeneratorSettings p_i45560_5_) {
 
         super(p_i45560_1_);
         this.parent = p_i45560_3_;

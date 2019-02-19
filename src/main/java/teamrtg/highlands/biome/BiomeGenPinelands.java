@@ -16,9 +16,9 @@ public class BiomeGenPinelands extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.PINELANDS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 3;
-        theBiomeDecorator.grassPerChunk = 6;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 3;
+        decorator.grassPerChunk = 6;
+        decorator.flowersPerChunk = 0;
 
         plants.add(HighlandsGenerators.thornbush);
         plants.add(HighlandsGenerators.blueberryBush);
@@ -37,7 +37,7 @@ public class BiomeGenPinelands extends BiomeGenBaseHighlands {
 
         super.decorate(world, random, pos);
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount / 2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.ironCount / 2, decorator.ironGen, decorator.chunkProviderSettings.ironMinHeight, decorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
 
         int i = 3 + random.nextInt(6);
         int j;

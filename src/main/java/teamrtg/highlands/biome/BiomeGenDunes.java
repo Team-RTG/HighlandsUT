@@ -13,9 +13,9 @@ public class BiomeGenDunes extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.DUNES.getProps());
 
-        theBiomeDecorator.treesPerChunk = 0;
-        theBiomeDecorator.grassPerChunk = 0;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 0;
+        decorator.grassPerChunk = 0;
+        decorator.flowersPerChunk = 0;
 
         this.topBlock = Blocks.SAND.getDefaultState();
         this.fillerBlock = Blocks.SAND.getDefaultState();

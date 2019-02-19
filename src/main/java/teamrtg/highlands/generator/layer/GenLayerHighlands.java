@@ -3,7 +3,7 @@ package teamrtg.highlands.generator.layer;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkProviderSettings;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.layer.*;
 
 import net.minecraftforge.common.BiomeManager;
@@ -42,12 +42,12 @@ public abstract class GenLayerHighlands {
         GenLayerAddMushroomIsland genlayeraddmushroomisland = new GenLayerAddMushroomIsland(5L, genlayeraddisland);
         GenLayerDeepOcean genlayerdeepocean = new GenLayerDeepOcean(4L, genlayeraddmushroomisland);
         GenLayer genlayer2 = GenLayerZoom.magnify(1000L, genlayerdeepocean, 0);
-        ChunkProviderSettings chunkprovidersettings = null;
+        ChunkGeneratorSettings chunkprovidersettings = null;
         int j = 4;
         int k = 5;
 
         if (p_180781_2_ == WorldType.CUSTOMIZED && p_180781_3_.length() > 0) {
-            chunkprovidersettings = ChunkProviderSettings.Factory.jsonToFactory(p_180781_3_).build();
+            chunkprovidersettings = ChunkGeneratorSettings.Factory.jsonToFactory(p_180781_3_).build();
             j = chunkprovidersettings.biomeSize;
             k = chunkprovidersettings.riverSize;
         }

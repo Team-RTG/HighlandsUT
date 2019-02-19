@@ -14,9 +14,9 @@ public class BiomeGenDryForest extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.DRY_FOREST.getProps());
 
-        theBiomeDecorator.treesPerChunk = 12;
-        theBiomeDecorator.grassPerChunk = 10;
-        theBiomeDecorator.flowersPerChunk = 1;
+        decorator.treesPerChunk = 12;
+        decorator.grassPerChunk = 10;
+        decorator.flowersPerChunk = 1;
 
         plants.add(HighlandsGenerators.raspberryBush);
         plants.add(HighlandsGenerators.mcRTulip);
@@ -43,6 +43,6 @@ public class BiomeGenDryForest extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(2, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount / 2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.goldCount / 2, decorator.goldGen, decorator.chunkProviderSettings.goldMinHeight, decorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
     }
 }

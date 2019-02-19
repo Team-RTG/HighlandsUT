@@ -22,9 +22,9 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.BADLANDS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 1;
-        theBiomeDecorator.grassPerChunk = 6;
-        theBiomeDecorator.flowersPerChunk = 1;
+        decorator.treesPerChunk = 1;
+        decorator.grassPerChunk = 6;
+        decorator.flowersPerChunk = 1;
 
         this.terrainInt1 = 0;
         this.terrainInt2 = 1;

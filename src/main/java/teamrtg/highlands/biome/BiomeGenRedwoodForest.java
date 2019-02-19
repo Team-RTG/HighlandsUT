@@ -21,9 +21,9 @@ public class BiomeGenRedwoodForest extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.REDWOOD_FOREST.getProps());
 
-        theBiomeDecorator.treesPerChunk = 14;
-        theBiomeDecorator.grassPerChunk = 5;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 14;
+        decorator.grassPerChunk = 5;
+        decorator.flowersPerChunk = 0;
 
         this.topBlock = Blocks.DIRT.getStateFromMeta(2);
 
@@ -55,7 +55,7 @@ public class BiomeGenRedwoodForest extends BiomeGenBaseHighlands {
 
         super.decorate(world, random, pos);
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.redstoneCount / 2, theBiomeDecorator.redstoneGen, theBiomeDecorator.chunkProviderSettings.redstoneMinHeight, theBiomeDecorator.chunkProviderSettings.redstoneMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.redstoneCount / 2, decorator.redstoneGen, decorator.chunkProviderSettings.redstoneMinHeight, decorator.chunkProviderSettings.redstoneMaxHeight, world, random, pos);
     }
 
 

@@ -12,9 +12,9 @@ public class BiomeGenBaldHill extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.BALD_HILL.getProps());
 
-        theBiomeDecorator.treesPerChunk = 0;
-        theBiomeDecorator.grassPerChunk = 4;
-        theBiomeDecorator.flowersPerChunk = 3;
+        decorator.treesPerChunk = 0;
+        decorator.grassPerChunk = 4;
+        decorator.flowersPerChunk = 3;
 
         plants.add(HighlandsGenerators.mcBluet);
         plants.add(HighlandsGenerators.mcAllium);

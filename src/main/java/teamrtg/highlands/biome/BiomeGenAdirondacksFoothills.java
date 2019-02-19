@@ -24,9 +24,9 @@ public class BiomeGenAdirondacksFoothills extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.ADIRONDACKS_FOOTHILLS.getProps());
 
-        theBiomeDecorator.treesPerChunk = 2;
-        theBiomeDecorator.grassPerChunk = 6;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 2;
+        decorator.grassPerChunk = 6;
+        decorator.flowersPerChunk = 0;
 
         this.terrainInt1 = 0;
         this.terrainInt2 = 1;
@@ -84,7 +84,7 @@ public class BiomeGenAdirondacksFoothills extends BiomeGenBaseHighlands {
             }
         }
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount / 2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.ironCount / 2, decorator.ironGen, decorator.chunkProviderSettings.ironMinHeight, decorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
 
         int i = 3 + random.nextInt(6);
         int j;

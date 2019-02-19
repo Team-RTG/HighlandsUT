@@ -137,7 +137,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree {
         else {
             float f = (float) this.heightLimit / 2.0F;
             float f1 = f - (float) p_76490_1_;
-            float f2 = MathHelper.sqrt_float(f * f - f1 * f1);
+            float f2 = MathHelper.sqrt(f * f - f1 * f1);
 
             if (f1 == 0.0F) {
                 f2 = f;
@@ -179,9 +179,9 @@ public class WorldGenGreatOak extends WorldGenAbstractTree {
 
     private int func_175935_b(BlockPos p_175935_1_) {
 
-        int i = MathHelper.abs_int(p_175935_1_.getX());
-        int j = MathHelper.abs_int(p_175935_1_.getY());
-        int k = MathHelper.abs_int(p_175935_1_.getZ());
+        int i = MathHelper.abs(p_175935_1_.getX());
+        int j = MathHelper.abs(p_175935_1_.getY());
+        int k = MathHelper.abs(p_175935_1_.getZ());
         return k > i && k > j ? k : (j > i ? j : i);
     }
 

@@ -17,11 +17,11 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands {
 
         spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
 
-        theBiomeDecorator.treesPerChunk = 0;
-        theBiomeDecorator.grassPerChunk = 15;
-        theBiomeDecorator.flowersPerChunk = 8;
+        decorator.treesPerChunk = 0;
+        decorator.grassPerChunk = 15;
+        decorator.flowersPerChunk = 8;
 
-        theBiomeDecorator.generateLakes = false;
+        decorator.generateLakes = false;
 
         plants.add(HighlandsGenerators.lavender);
         plants.add(HighlandsGenerators.cotton);
@@ -42,6 +42,6 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands {
         super.decorate(world, random, pos);
 
         genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.lapisCount / 2, theBiomeDecorator.lapisGen, 0, 32, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.lapisCount / 2, decorator.lapisGen, 0, 32, world, random, pos);
     }
 }

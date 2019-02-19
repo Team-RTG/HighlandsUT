@@ -12,9 +12,9 @@ public class BiomeGenLake extends BiomeGenBaseHighlands {
 
         super(HLBiomeProps.LAKE.getProps());
 
-        theBiomeDecorator.treesPerChunk = 3;
-        theBiomeDecorator.grassPerChunk = 12;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 3;
+        decorator.grassPerChunk = 12;
+        decorator.flowersPerChunk = 0;
 
         this.spawnableCreatureList.clear();
     }

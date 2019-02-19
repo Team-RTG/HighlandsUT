@@ -20,9 +20,9 @@ public class BiomeGenGreyMountainsFoothills extends BiomeGenBaseHighlands {
 
         //this.spawnableCreatureList.add(new SpawnListEntry(EntityHorse.class, 5, 2, 6));
 
-        theBiomeDecorator.treesPerChunk = 0;
-        theBiomeDecorator.grassPerChunk = 8;
-        theBiomeDecorator.flowersPerChunk = 0;
+        decorator.treesPerChunk = 0;
+        decorator.grassPerChunk = 8;
+        decorator.flowersPerChunk = 0;
 
         this.fillerBlock = Blocks.STONE.getDefaultState();
 
@@ -75,7 +75,7 @@ public class BiomeGenGreyMountainsFoothills extends BiomeGenBaseHighlands {
             }
         }
 
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount * 3 / 4, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight * 3 / 2, world, random, pos);
+        genStandardOre(decorator.chunkProviderSettings.ironCount * 3 / 4, decorator.ironGen, decorator.chunkProviderSettings.ironMinHeight, decorator.chunkProviderSettings.ironMaxHeight * 3 / 2, world, random, pos);
     }
 
 
