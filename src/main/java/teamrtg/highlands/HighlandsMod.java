@@ -8,6 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -19,10 +20,14 @@ import teamrtg.highlands.block.HighlandsBlocks;
 import teamrtg.highlands.generator.GeneratePlants;
 import teamrtg.highlands.generator.GenerateRiverRapids;
 import teamrtg.highlands.generator.GenerateTrees;
+import teamrtg.highlands.proxy.CommonProxy;
 import teamrtg.highlands.reference.ModInfo;
 
 @Mod(modid = ModInfo.MOD_ID, name = ModInfo.MOD_NAME, version = ModInfo.MOD_VERSION)
 public class HighlandsMod {
+
+    @SidedProxy(clientSide = "teamrtg.highlands.proxy.ClientProxy", serverSide = "teamrtg.highlands.proxy.ServerProxy")
+    public static CommonProxy proxy;
 
     public static WorldType worldTypeHighlands;
     public static WorldType worldTypeHighlandsLB;
@@ -36,6 +41,8 @@ public class HighlandsMod {
 
         MinecraftForge.TERRAIN_GEN_BUS.register(eventMgr);
         MinecraftForge.EVENT_BUS.register(eventMgr);
+
+        MinecraftForge.EVENT_BUS.register(HighlandsBlocks.class);
 
         Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "highlands.cfg"));
         config.load();
@@ -56,8 +63,6 @@ public class HighlandsMod {
         GameRegistry.registerWorldGenerator(genRRapids, 10);
 
         HighlandsSettings.constructSettings();
-
-        HighlandsBlocks.constructBlocks();
 
         HighlandsBiomes.constructBiomes();
         HighlandsBiomes.setUpAllSubBiomes();

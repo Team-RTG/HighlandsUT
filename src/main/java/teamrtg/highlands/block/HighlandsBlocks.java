@@ -6,9 +6,10 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -20,12 +21,11 @@ public class HighlandsBlocks {
     public static final int NUM_TREE_TYPES = 7;
     public static final int NUM_PLANTS = 9;
 
-    public static final CreativeTabs tabHighlands = new CreativeTabs("highlands") {
-
+    public static final CreativeTabs tabHighlands = new CreativeTabs(ModInfo.MOD_ID){
+        @Override
         @SideOnly(Side.CLIENT)
-        public Item getTabIconItem() {
-
-            return Item.getItemFromBlock(Blocks.SAPLING);
+        public ItemStack getTabIconItem() {
+            return new ItemStack(Blocks.SAPLING);
         }
     };
 
@@ -45,8 +45,7 @@ public class HighlandsBlocks {
     //plants
     public static Block[] plants;
 
-    public static void constructBlocks() {
-        //initialize EnumType meta lookup
+    public static void registerBlocks(RegistryEvent.Register<Block> event){
         EnumTypeTree.ASPEN.setMetaLookup();
         EnumTypeTree.POPLAR.setMetaLookup();
         EnumTypeTree.EUCA.setMetaLookup();
@@ -84,12 +83,14 @@ public class HighlandsBlocks {
             woods[i] = new BlockHighlandsLog(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
             leaves[i] = new BlockHighlandsLeaves(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
             saplings[i] = new BlockHighlandsSapling(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName());
+            stairs[i] = new BlockHighlandsStair(EnumTypeTree.META_LOOKUP[i], ModInfo.MOD_ID + "_" + EnumTypeTree.META_LOOKUP[i].getName(), planks[i]);
 
 
-            GameRegistry.registerBlock(planks[i], planks[i].getUnlocalizedName().substring(15));
-            GameRegistry.registerBlock(woods[i], woods[i].getUnlocalizedName().substring(15));
-            GameRegistry.registerBlock(leaves[i], leaves[i].getUnlocalizedName().substring(15));
-            GameRegistry.registerBlock(saplings[i], saplings[i].getUnlocalizedName().substring(15));
+            event.getRegistry().register(planks[i]);
+            event.getRegistry().register(stairs[i]);
+            event.getRegistry().register(woods[i]);
+            event.getRegistry().register(leaves[i]);
+            event.getRegistry().register(saplings[i]);
 
             OreDictionary.registerOre("logWood", woods[i]);
             OreDictionary.registerOre("plankWood", planks[i]);
@@ -104,11 +105,16 @@ public class HighlandsBlocks {
         for (int i = 0; i < NUM_PLANTS; i++) {
             plants[i] = new BlockHighlandsPlant(EnumTypePlant.META_LOOKUP[i].name);
 
-            GameRegistry.registerBlock(plants[i], plants[i].getUnlocalizedName().substring(15));
+            event.getRegistry().register(plants[i]);
 
             Blocks.FIRE.setFireInfo(plants[i], 60, 100);
         }
         ((BlockHighlandsPlant) plants[EnumTypePlant.THORNBUSH.meta]).thornbush = true;
+    }
+
+    public static void constructBlocks() {
+        //initialize EnumType meta lookup
+
     }
 
     public static void registerRenders() {
